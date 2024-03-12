@@ -1,5 +1,7 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Categories;
+using NewspaperPublishing.Services.Unit.Tests.CategoryTests;
+using NewspaperPublishing.Test.Tools.Categories.Factories;
 
 namespace NewspaperPublishing.Spec.Tests.Categories
 {
@@ -16,7 +18,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
 
         public async Task Add(AddCategoryDto dto)
         {
-            if (_repository.Find(dto.Title) != null)
+            if (_repository.FindCategoryTitle(dto.Title) != null)
             {
                 throw new ThrowAddCategoryIsDuplicateTitleException();
             }
@@ -26,6 +28,25 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                 Weight = dto.Weight,
             };
             _repository.Add(category);
+            await _unitOfWork.Complete();
+        }
+
+        public async Task Update(int id, UpdateCategoryDto dto)
+        {
+            var category= _repository.FindCategoryById(id);
+            if (category == null)
+            {
+                throw new ThrowUpdateCategoryIfCategoryIsNullException();
+
+
+            }
+            if(_repository.FindCategoryTitle(dto.Title) != null)
+            {
+                throw new ThrowUpdateCategoryIsDuplicateTitleException();
+            }
+
+            category.Title = dto.Title;
+            category.Weight = dto.Weight;
             await _unitOfWork.Complete();
         }
     }

@@ -18,7 +18,12 @@ namespace NewspaperPublishing.Spec.Tests.Categories
            _categories.Add(category);
         }
 
-        public Category? Find(string Title)
+        public Category? FindCategoryById(int id)
+        {
+            return _categories.FirstOrDefault(_ => _.Id == id);
+        }
+
+        public Category? FindCategoryTitle(string Title)
         {
             return _categories.FirstOrDefault(_ => _.Title == Title);
         }

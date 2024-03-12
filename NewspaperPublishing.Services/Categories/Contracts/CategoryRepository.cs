@@ -5,6 +5,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
     public interface CategoryRepository
     {
         void Add(Category category);
-        Category? Find(string Title);
+        Category? FindCategoryTitle(string Title);
+        Category? FindCategoryById(int id);
     }
 }

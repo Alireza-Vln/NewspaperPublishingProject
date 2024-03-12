@@ -22,7 +22,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
             _sut = CategoryAppServiceFactory.Create(SetupContext);
         }
         [Fact]
-        public async Task Add_addS_category_properly()
+        public async Task Add_add_category_properly()
         {
             var dto = AddCategoryDtoFactory.Create();
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewspaperPublishing.Spec.Tests.Categories;
+using NewspaperPublishing.Test.Tools.Categories.Factories;
 
 namespace NewspaperPublishing.RestApi.Controllers.Categories
 {
@@ -16,6 +17,11 @@ namespace NewspaperPublishing.RestApi.Controllers.Categories
         public async Task AddCategory(AddCategoryDto dto)
         {
             await _service.Add(dto);
+        }
+        [HttpPatch]
+        public async Task UpdateCategory([FromQuery]int Id,[FromBody]UpdateCategoryDto dto)
+        {
+            await _service.Update(Id, dto);
         }
     }
 }
