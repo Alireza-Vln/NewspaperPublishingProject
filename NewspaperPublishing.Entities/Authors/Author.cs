@@ -9,5 +9,9 @@ namespace NewspaperPublishing.Entities.Authors
         public string LastName { get; set; }
         public int View { get; set; }
         public List<News> News { get; set; }
+        public Author()
+        {
+            News = new List<News>();
+        }
     }
 }

@@ -11,5 +11,10 @@ namespace NewspaperPublishing.Entities.Newspapers
         public int Weight { get; set; }
         public List<Category> Categories { get; set; }
         public List<News> News { get; set; }
+        public Newspaper()
+        {
+            Categories = new List<Category>();
+            News = new List<News>();
+        }
     }
 }

@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewspaperPublishing.Contracts\NewspaperPublishing.Contracts.csproj" />
     <ProjectReference Include="..\NewspaperPublishing.Entities\NewspaperPublishing.Entities.csproj" />
+    <ProjectReference Include="..\NewspaperPublishing.Services\NewspaperPublishing.Services.csproj" />
   </ItemGroup>
 
 </Project>

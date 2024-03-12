@@ -18,7 +18,7 @@ namespace NewspaperPublishing.Persistence.EF.Newses
             builder.Property(_ => _.Title).IsRequired();
             builder.Property(_=>_.AuthorId).IsRequired();
             builder.Property(_=>_.Weight).IsRequired();
-            builder.Property(_ => _.Tags);
+           
             builder.Property(_=>_.View);
             builder.Property(_ => _.NewspaperId);
 

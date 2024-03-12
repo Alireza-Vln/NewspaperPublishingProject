@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Persistence.EF;
+using NewspaperPublishing.Spec.Tests.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ builder.Configuration.AddJsonFile("appsettings.json");
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<EFDataContext>(
     options => options.UseSqlServer(connectionString));
+builder.Services.AddScoped<UnitOfWork,EFUnitOfWork>();
+builder.Services.AddScoped<CategoryService, CategoryAppService>();
+builder.Services.AddScoped<CategoryRepository,EFCategoryRepository>();
 
 var app = builder.Build();
 
