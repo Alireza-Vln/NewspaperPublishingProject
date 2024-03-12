@@ -16,10 +16,10 @@ namespace NewspaperPublishing.Spec.Tests.Categories
 
         public async Task Add(AddCategoryDto dto)
         {
-            //if (_repository.Find(dto.Title) != null)
-            //{
-
-            //}
+            if (_repository.Find(dto.Title) != null)
+            {
+                throw new ThrowAddCategoryIsDuplicateTitleException();
+            }
             var category = new Category
             {
                 Title = dto.Title,

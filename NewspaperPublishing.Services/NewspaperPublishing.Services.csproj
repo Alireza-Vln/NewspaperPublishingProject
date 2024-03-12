@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\Contracts\Exceptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NewspaperPublishing.Contracts\NewspaperPublishing.Contracts.csproj" />
     <ProjectReference Include="..\NewspaperPublishing.Entities\NewspaperPublishing.Entities.csproj" />
   </ItemGroup>

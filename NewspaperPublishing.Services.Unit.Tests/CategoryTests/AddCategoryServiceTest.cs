@@ -1,7 +1,9 @@
 ﻿using FluentAssertions;
 using NewspaperPublishing.Persistence.EF;
 using NewspaperPublishing.Spec.Tests.Categories;
+using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
+using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,19 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
             actual.Title.Should().Be(dto.Title);
             actual.Weight.Should().Be(dto.Weight);
 
+        }
+        [Fact]
+        public async Task Throw_add_Category_is_duplicate_title_exception()
+        {
+            var category=new CategoryBuilder()
+                .WithTitle("test")
+                .Build();
+            DbContext.Save(category);
+            var dto = AddCategoryDtoFactory.Create("test");
+            
+            var actual=()=> _sut.Add(dto);
+
+            await actual.Should().ThrowExactlyAsync<ThrowAddCategoryIsDuplicateTitleException>();
         }
     }
 }

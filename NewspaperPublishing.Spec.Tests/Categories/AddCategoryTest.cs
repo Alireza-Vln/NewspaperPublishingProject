@@ -18,10 +18,10 @@ namespace NewspaperPublishing.Spec.Tests.Categories
     IWantTo = " دسته بندی اضافه کنم",
     InOrderTo = " دسته بندی رد روزنامه داشته باشم")]
 
-    public class CategoryTest : BusinessIntegrationTest
+    public class AddCategoryTest : BusinessIntegrationTest
     {
         readonly CategoryService _sut;
-        public CategoryTest()
+        public AddCategoryTest()
         {
             _sut = CategoryAppServiceFactory.Create(SetupContext);
         }

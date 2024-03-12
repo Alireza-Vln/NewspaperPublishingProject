@@ -25,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewspaperPublishing.Contracts\NewspaperPublishing.Contracts.csproj" />
+    <ProjectReference Include="..\NewspaperPublishing.Persistence.EF\NewspaperPublishing.Persistence.EF.csproj" />
     <ProjectReference Include="..\NewspaperPublishing.Test.Tools\NewspaperPublishing.Test.Tools.csproj" />
   </ItemGroup>
 
