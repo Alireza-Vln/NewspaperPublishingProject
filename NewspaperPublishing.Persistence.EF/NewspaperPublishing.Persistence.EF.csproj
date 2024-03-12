@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NewspaperPublishing.Entities\NewspaperPublishing.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
