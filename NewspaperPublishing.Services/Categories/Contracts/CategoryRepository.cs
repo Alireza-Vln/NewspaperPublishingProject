@@ -7,5 +7,6 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         void Add(Category category);
         Category? FindCategoryTitle(string Title);
         Category? FindCategoryById(int id);
+        void Delete(Category? category);
     }
 }

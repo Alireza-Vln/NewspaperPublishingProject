@@ -19,9 +19,14 @@ namespace NewspaperPublishing.RestApi.Controllers.Categories
             await _service.Add(dto);
         }
         [HttpPatch]
-        public async Task UpdateCategory([FromQuery]int Id,[FromBody]UpdateCategoryDto dto)
+        public async Task UpdateCategory([FromQuery] int Id, [FromBody] UpdateCategoryDto dto)
         {
             await _service.Update(Id, dto);
+        }
+        [HttpDelete]
+        public async Task DeleteCategory([FromQuery] int categoryId)
+        {
+            await _service.Delete(categoryId);
         }
     }
 }

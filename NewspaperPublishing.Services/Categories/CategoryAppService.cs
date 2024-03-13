@@ -31,6 +31,21 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             await _unitOfWork.Complete();
         }
 
+        public async Task Delete(int id)
+        {
+            var category=_repository.FindCategoryById(id);
+            if (category == null)
+            {
+                throw new ThrowDeletesCategoryIfCategoryIsNullException();
+            }
+            if(category.News==null)
+            {
+                throw new ThrowDeleteTheCategoryHasNewsException();
+            }
+            _repository.Delete(category);
+            await _unitOfWork.Complete();
+        }
+
         public async Task Update(int id, UpdateCategoryDto dto)
         {
             var category= _repository.FindCategoryById(id);

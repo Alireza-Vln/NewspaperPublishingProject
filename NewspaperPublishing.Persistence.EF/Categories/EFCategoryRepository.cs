@@ -18,6 +18,11 @@ namespace NewspaperPublishing.Spec.Tests.Categories
            _categories.Add(category);
         }
 
+        public void Delete(Category? category)
+        {
+            _categories.Remove(category);
+        }
+
         public Category? FindCategoryById(int id)
         {
             return _categories.FirstOrDefault(_ => _.Id == id);
