@@ -1,4 +1,5 @@
 ﻿using NewspaperPublishing.Entities.Categories;
+using NewspaperPublishing.Services.Categories.Contracts.Dtos;
 
 namespace NewspaperPublishing.Spec.Tests.Categories
 {
@@ -8,5 +9,6 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         Category? FindCategoryTitle(string Title);
         Category? FindCategoryById(int id);
         void Delete(Category? category);
+        List<GetCategoryDto> GetAll();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewspaperPublishing.Services.Categories.Contracts.Dtos;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
 
@@ -27,6 +28,11 @@ namespace NewspaperPublishing.RestApi.Controllers.Categories
         public async Task DeleteCategory([FromQuery] int categoryId)
         {
             await _service.Delete(categoryId);
+        }
+        [HttpGet]
+        public async Task<List<GetCategoryDto>> GetAllCategory()
+        {
+           return await _service.GetAll();
         }
     }
 }

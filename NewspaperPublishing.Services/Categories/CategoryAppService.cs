@@ -1,5 +1,6 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Categories;
+using NewspaperPublishing.Services.Categories.Contracts.Dtos;
 using NewspaperPublishing.Services.Unit.Tests.CategoryTests;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
 
@@ -46,14 +47,17 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             await _unitOfWork.Complete();
         }
 
+        public async Task<List<GetCategoryDto>> GetAll()
+        {
+             return _repository.GetAll();
+        }
+
         public async Task Update(int id, UpdateCategoryDto dto)
         {
             var category= _repository.FindCategoryById(id);
             if (category == null)
             {
                 throw new ThrowUpdateCategoryIfCategoryIsNullException();
-
-
             }
             if(_repository.FindCategoryTitle(dto.Title) != null)
             {

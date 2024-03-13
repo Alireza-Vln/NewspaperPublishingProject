@@ -1,4 +1,5 @@
-﻿using NewspaperPublishing.Test.Tools.Categories.Factories;
+﻿using NewspaperPublishing.Services.Categories.Contracts.Dtos;
+using NewspaperPublishing.Test.Tools.Categories.Factories;
 
 namespace NewspaperPublishing.Spec.Tests.Categories
 {
@@ -6,6 +7,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
     {
         Task Add(AddCategoryDto dto);
         Task Delete(int id);
+        Task<List<GetCategoryDto>> GetAll();
         Task Update(int id, UpdateCategoryDto dto);
     }
 }
