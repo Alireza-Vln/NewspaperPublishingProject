@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Authors\Contarcts\Exeptions\" />
     <Folder Include="Newes\Contracts\Dtos\" />
     <Folder Include="Newes\Contracts\Exeptions\" />
   </ItemGroup>
