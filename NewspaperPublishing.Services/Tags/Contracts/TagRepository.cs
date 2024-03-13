@@ -1,4 +1,5 @@
 ﻿using NewspaperPublishing.Entities.Tags;
+using NewspaperPublishing.Services.Tags.Contracts.Dtos;
 
 namespace NewspaperPublishing.Spec.Tests.Tags
 {
@@ -8,5 +9,6 @@ namespace NewspaperPublishing.Spec.Tests.Tags
         void Delete(Tag tag);
         Tag? FindTagById(int id);
         Tag? FindTagTitle(string title);
+        List<GetTagDto> GetAll();
     }
 }

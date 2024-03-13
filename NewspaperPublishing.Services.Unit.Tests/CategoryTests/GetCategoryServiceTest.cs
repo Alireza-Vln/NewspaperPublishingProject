@@ -31,7 +31,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
             actual.Single().Title.Should().Be(category.Title);
             actual.Single().Weight.Should().Be(category.Weight);
             actual.Single().View.Should().Be(category.View);
-            actual.Single().NewspaperId.Should().Be(category.NewspaperId);
+            
            
         }
     }

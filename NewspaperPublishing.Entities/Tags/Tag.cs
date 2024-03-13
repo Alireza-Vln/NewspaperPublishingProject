@@ -1,4 +1,5 @@
 ﻿using NewspaperPublishing.Entities.Categories;
+using NewspaperPublishing.Entities.Newses;
 
 namespace NewspaperPublishing.Entities.Tags
 {
@@ -8,7 +9,7 @@ namespace NewspaperPublishing.Entities.Tags
         public string Title { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public int NewsId { get; set; }
+       
 
     }
 }

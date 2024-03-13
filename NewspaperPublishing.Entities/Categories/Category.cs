@@ -21,8 +21,6 @@ namespace NewspaperPublishing.Entities.Categories
         public string Title { get; set; }
         public int Weight { get; set; }
         public int View { get; set; }
-        public Newspaper Newspaper { get; set; }
-        public int? NewspaperId { get; set; }
         public List<Tag> Tags { get; set; }
         public List<News> News { get; set; }
 

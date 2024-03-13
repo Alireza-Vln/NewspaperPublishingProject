@@ -45,7 +45,7 @@ namespace NewspaperPublishing.Spec.Tests.Tags
                 Title = ("قتل"), 
             };
             
-         await  _sut.Add(_category.Id, dto);
+         await  _sut.Add(_category.Id,dto);
 
 
         }

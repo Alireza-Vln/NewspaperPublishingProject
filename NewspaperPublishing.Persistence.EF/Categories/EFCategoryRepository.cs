@@ -44,7 +44,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                      Title = _.Title,
                      Weight = _.Weight,
                      View = _.View,
-                     NewspaperId = _.NewspaperId
+                     
                  }).ToList();
             
             return category;  

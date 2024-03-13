@@ -16,10 +16,11 @@ namespace NewspaperPublishing.Migrations
         {
             Create.Table("Tags")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Title").AsString().NotNullable()
-                .WithColumn("CategoryId").AsInt32().ForeignKey("FK_Tags_Categories", "Categories", "Id")
-                .WithColumn("NewsId").AsInt32();
-           
+                .WithColumn("Title").AsString().NotNullable()   
+                 .WithColumn("CategoryId").AsInt32().
+                 ForeignKey("FK_Tags_Categories", "Categories", "Id");
+
+
         }
         public override void Down()
         {

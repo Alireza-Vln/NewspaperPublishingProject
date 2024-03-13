@@ -47,8 +47,8 @@ namespace NewspaperPublishing.Spec.Tests.Tags
         [When(" یک دسته بندی با عنوان قتل  اضافه میکنیم")]
         private async Task When()
         {
-            var dto = AddTagDtoFactory.Create("قتل");
-            _actual=()=> _sut.Add(_category.Id, dto);
+            var dto = AddTagDtoFactory.Create("قتل");;
+            _actual=()=> _sut.Add(_category.Id,dto);
 
         }
         [Then(" تنها یک دسته بندی  با  عنوان قتل در فهرست برچسبها  وجود دارد ")]

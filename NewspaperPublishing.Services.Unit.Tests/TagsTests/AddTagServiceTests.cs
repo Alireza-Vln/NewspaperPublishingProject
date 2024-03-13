@@ -17,46 +17,46 @@ namespace NewspaperPublishing.Services.Unit.Tests.TagsTests
     public class AddTagServiceTests : BusinessUnitTest
     {
         readonly TagService _sut;
-        private Category _category;
+       
         public AddTagServiceTests()
         {
             _sut = TagAppServiceFactory.Create(SetupContext);
         }
         [Fact]
-        public async Task Add_add_tag_properly()
+        public async Task Add_adds_tag_properly()
         {
-            _category = new CategoryBuilder().Build();
-            DbContext.Save(_category);
-            var dto = AddTagDtoFactory.Create("test");
+            var category = new CategoryBuilder().Build();
+            DbContext.Save(category);
+            var dto = AddTagDtoFactory.Create();
 
-           await _sut.Add(_category.Id, dto);
+           await _sut.Add(category.Id, dto);
 
-            var actual = ReadContext.Tags.Single();
+            var actual = ReadContext.Tags.Single(_=>_.CategoryId==category.Id);
             actual.Title.Should().Be(dto.Title);
-            actual.CategoryId.Should().Be(_category.Id);
+            actual.CategoryId.Should().Be(category.Id);
         }
         [Fact]
         public async Task Throw_add_tag_is_duplicate_title_exception()
         {
-            _category = new CategoryBuilder().Build();
-            DbContext.Save(_category);
+            var category = new CategoryBuilder().Build();
+            DbContext.Save(category);
             var tag=new TagBuilder()
-                .WithCategoryId(_category.Id)
+                .WithCategoryId(category.Id)
                 .Build();
             DbContext.Save(tag);
             var dto=AddTagDtoFactory.Create(tag.Title);
 
-            var actual=()=> _sut.Add(_category.Id, dto);
+            var actual=()=> _sut.Add(category.Id, dto);
 
             await actual.Should().ThrowExactlyAsync<ThrowAddTagIsDuplicateTitleException>();
         }
         [Fact]
         public async Task Throw_add_tag_if_category_is_null_exception()
         {
-            var dummiId = 454;
+            var dummyId = 454;
             var dto = AddTagDtoFactory.Create();
 
-          var actual=()=> _sut.Add(dummiId, dto);
+          var actual=()=> _sut.Add(dummyId,dto);
 
          await   actual.Should().ThrowExactlyAsync<ThrowAddTagIfCategoryIsNullException>();
 

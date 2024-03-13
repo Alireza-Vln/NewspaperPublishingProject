@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Persistence.EF;
+using NewspaperPublishing.Persistence.EF.Newses;
+using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Tags;
 
@@ -22,6 +24,7 @@ builder.Services.AddScoped<CategoryService, CategoryAppService>();
 builder.Services.AddScoped<CategoryRepository,EFCategoryRepository>();
 builder.Services.AddScoped<TagService, TagAppService>();
 builder.Services.AddScoped<TagRepository,EFTagRepository>();
+builder.Services.AddScoped<NewsRepository,EFNewsRepository>();
 
 var app = builder.Build();
 
