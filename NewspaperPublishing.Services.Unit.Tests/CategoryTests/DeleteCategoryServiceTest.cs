@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Test.Tools.Categories.Builders;
@@ -48,10 +49,19 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
         {
             var category=new CategoryBuilder().Build();
             DbContext.Save(category);
+            var author = new Author
+            {
+                FirstName = "dummy",
+                LastName = "dummy",
+
+            };
+            DbContext.Save(author);
             var news=new NewsBuilder()
+                .WithAuthorId(author.Id)
                 .WithCategoryId(category.Id)
                 .Build();
             DbContext.Save(news);
+            
 
             var actual=()=>_sut.Delete(category.Id);
             

@@ -20,7 +20,7 @@ namespace NewspaperPublishing.Persistence.EF.Newses
             builder.Property(_=>_.Weight).IsRequired();
             builder.Property(_=>_.CategoryId);
             builder.Property(_=>_.View);
-            builder.Property(_ => _.NewspaperId);
+           
 
         }
     }

@@ -12,7 +12,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                 Title = "dummy-title",
                 Weight = 5,
                 AuthorId = 1,
-                NewspaperId = 1,
+               
                 CategoryId = 1,
                 
 
@@ -23,9 +23,16 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             _news.CategoryId = categoryId;
             return this;
         }
+        public NewsBuilder WithAuthorId(int AuthorId)
+        {
+            _news.AuthorId= AuthorId;
+            return this;
+        }
         public News Build()
         {
             return _news;
         }
+
+       
     }
 }

@@ -16,6 +16,7 @@ namespace NewspaperPublishing.Migrations
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Title").AsString().NotNullable()
                 .WithColumn("Weight").AsInt32()
+                .WithColumn("NewsId").AsInt32()
                 .WithColumn("Date").AsDate();
         }
         public override void Down()

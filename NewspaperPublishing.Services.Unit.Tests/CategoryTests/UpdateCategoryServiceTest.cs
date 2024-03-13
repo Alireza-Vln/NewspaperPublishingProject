@@ -39,6 +39,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
             var category2 = new CategoryBuilder()
                 .WithTitle("test2")
                 .Build();
+            
             DbContext.Save(category2);
             var dto = UpdateCategoryDtoFactory.Create("test");
 

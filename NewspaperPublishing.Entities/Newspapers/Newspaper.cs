@@ -9,10 +9,12 @@ namespace NewspaperPublishing.Entities.Newspapers
         public int Title { get; set; }
         public DateTime Date { get; set; }
         public int Weight { get; set; }
-        public List<News> News { get; set; }
+        public News News { get; set; }
+        public int NewsId { get; set; }
+       // public List<int> NewsesId { get; set; }
         public Newspaper()
         { 
-            News = new List<News>();
+           // NewsesId = new List<int>();
         }
     }
 }

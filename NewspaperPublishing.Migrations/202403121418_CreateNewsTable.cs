@@ -15,7 +15,6 @@ namespace NewspaperPublishing.Migrations
             Create.Table("Newses")
                 .WithColumn("Id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("Title").AsString().NotNullable()
-                .WithColumn("NewspaperId").AsInt32()
                 .WithColumn("AuthorId").AsInt32()
                 .WithColumn("View").AsInt32()
                 .WithColumn("CategoryId").AsInt32()
