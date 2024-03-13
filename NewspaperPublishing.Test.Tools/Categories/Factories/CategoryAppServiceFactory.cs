@@ -1,4 +1,5 @@
 ﻿using NewspaperPublishing.Persistence.EF;
+using NewspaperPublishing.Persistence.EF.Newses;
 using NewspaperPublishing.Spec.Tests.Categories;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,10 @@ namespace NewspaperPublishing.Test.Tools.Categories.Factories
     {
         public static CategoryService Create(EFDataContext context)
         {
-           return new CategoryAppService(new EFCategoryRepository(context), new EFUnitOfWork(context));
+           return new CategoryAppService(
+               new EFCategoryRepository(context),
+               new EFUnitOfWork(context),
+               new EFNewsRepository(context));
         } 
     }
 }

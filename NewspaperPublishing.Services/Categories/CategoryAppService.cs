@@ -1,6 +1,7 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Services.Categories.Contracts.Dtos;
+using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Unit.Tests.CategoryTests;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
 
@@ -10,11 +11,14 @@ namespace NewspaperPublishing.Spec.Tests.Categories
     {
         readonly CategoryRepository _repository;
         readonly UnitOfWork _unitOfWork;
+        readonly NewsRepository _newsRepository;
         public CategoryAppService(CategoryRepository repository,
-            UnitOfWork unitOfWork)
+            UnitOfWork unitOfWork,
+            NewsRepository newsRepository)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _newsRepository = newsRepository;
         }
 
         public async Task Add(AddCategoryDto dto)
@@ -39,7 +43,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             {
                 throw new ThrowDeletesCategoryIfCategoryIsNullException();
             }
-            if(category.News==null)
+            if(_newsRepository.FindCategoryByNews(category.Id)!=null)
             {
                 throw new ThrowDeleteTheCategoryHasNewsException();
             }

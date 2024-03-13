@@ -13,7 +13,7 @@ namespace NewspaperPublishing.Persistence.EF.Newses
     {
         public void Configure(EntityTypeBuilder<News> builder)
         {
-         builder.HasKey(x => x.Id);
+         builder.HasKey(_ => _.Id);
             builder.Property(_ => _.Id).ValueGeneratedOnAdd();
             builder.Property(_ => _.Title).IsRequired();
             builder.Property(_=>_.AuthorId).IsRequired();

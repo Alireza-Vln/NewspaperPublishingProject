@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
@@ -16,17 +17,18 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
     public class DeleteCategoryServiceTest:BusinessUnitTest
     {
         readonly CategoryService _sut;
+
         public DeleteCategoryServiceTest()
         {
             _sut = CategoryAppServiceFactory.Create(SetupContext);
         }
         [Fact]
-        public void Delete_deletes_category_properly()
+        public async void Delete_deletes_category_properly()
         {
             var category = new CategoryBuilder().Build();
             DbContext.Save(category);
 
-            _sut.Delete(category.Id);
+           await _sut.Delete(category.Id);
 
             var actual = ReadContext.Categories.FirstOrDefault();
             actual.Should().BeNull();
@@ -53,7 +55,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
 
             var actual=()=>_sut.Delete(category.Id);
             
-            await actual.Should().ThrowExactlyAsync<ThrowDeleteTheCategoryHasNewsException>();
+           await  actual.Should().ThrowExactlyAsync<ThrowDeleteTheCategoryHasNewsException>();
         }
 
     }

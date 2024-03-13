@@ -17,6 +17,9 @@ namespace NewspaperPublishing.Persistence.EF.Tags
             builder.Property(_ => _.Id).ValueGeneratedOnAdd();
             builder.Property(_ => _.Title).IsRequired();
             builder.Property(_=>_.CategoryId).IsRequired();
+            builder.HasOne(_ => _.Category)
+                .WithMany(_ => _.Tags)
+                .HasForeignKey(_ => _.CategoryId).IsRequired() ;
         }
     }
 }
