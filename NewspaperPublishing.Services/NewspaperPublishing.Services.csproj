@@ -11,9 +11,4 @@
     <ProjectReference Include="..\NewspaperPublishing.Entities\NewspaperPublishing.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Newes\Contracts\Dtos\" />
-    <Folder Include="Newes\Contracts\Exeptions\" />
-  </ItemGroup>
-
 </Project>

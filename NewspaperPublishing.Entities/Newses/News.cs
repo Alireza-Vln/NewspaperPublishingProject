@@ -16,6 +16,7 @@ namespace NewspaperPublishing.Entities.Newses
         public Category Category { get; set; }
         public int CategoryId { get; set; }
    
+   
 
     }
 }

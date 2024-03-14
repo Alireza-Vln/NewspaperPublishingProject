@@ -18,6 +18,11 @@ namespace NewspaperPublishing.Persistence.EF.Newses
             _news = context.Newses;
         }
 
+        public void Add(News news)
+        {
+            _news.Add(news);
+        }
+
         public News? FindCategoryByNews(int categoryId)
         {
            return _news.FirstOrDefault(_=>_.CategoryId == categoryId);

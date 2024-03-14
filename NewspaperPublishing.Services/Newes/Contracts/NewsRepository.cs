@@ -10,6 +10,7 @@ namespace NewspaperPublishing.Services.Newes.Contracts
 {
     public interface NewsRepository
     {
+        void Add(News news);
         News? FindCategoryByNews(int categoryId);
     }
 }
