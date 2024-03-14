@@ -13,10 +13,10 @@ using Xunit;
 
 namespace NewspaperPublishing.Services.Unit.Tests.Authors
 {
-    public class DeleteAuthorTests :BusinessUnitTest
+    public class DeleteAuthorServiceTests :BusinessUnitTest
     {
         readonly AuthorService _sut;
-        public DeleteAuthorTests()
+        public DeleteAuthorServiceTests()
         {
             _sut = AuthorAppServiceFactory.Create(SetupContext);
 
@@ -35,14 +35,14 @@ namespace NewspaperPublishing.Services.Unit.Tests.Authors
 
         }
         [Fact]
-        public void Throw_deletes_author_if_author_is_null_exception()
+        public async void Throw_deletes_author_if_author_is_null_exception()
         {
             var dummyId = 354;
 
            var actual=()=> _sut.Delete(dummyId);
 
 
-            actual.Should().ThrowExactlyAsync<ThrowDeletesAuthorIfAuthorIsNullException>();
+           await actual.Should().ThrowExactlyAsync<ThrowDeletesAuthorIfAuthorIsNullException>();
         }
     }
 }

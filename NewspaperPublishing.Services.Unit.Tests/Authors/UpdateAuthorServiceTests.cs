@@ -12,23 +12,37 @@ using Xunit;
 
 namespace NewspaperPublishing.Services.Unit.Tests.Authors
 {
-    public class AddAuthorTests :BusinessUnitTest
+    public class UpdateAuthorServiceTests:BusinessUnitTest
     {
         readonly AuthorService _sut;
-        public AddAuthorTests()
+        public UpdateAuthorServiceTests()
         {
             _sut = AuthorAppServiceFactory.Create(SetupContext);
+
         }
         [Fact]
-        public void Add_adds_author_properly()
+        public void Update_updates_author_properly()
         {
-            var dto=AddAuthorDtoFactory.Create();
-            
-            _sut.Add(dto);
+            var author=new AuthorBuilder().Build();
+            DbContext.Save(author);
+            var dto = UpdateAuthorDtoFactory.Create();
+
+            _sut.Update(author.Id, dto);
 
             var actual = ReadContext.Authors.Single();
             actual.FirstName.Should().Be(dto.FirstName);
             actual.LastName.Should().Be(dto.LastName);
+        }
+        [Fact]
+        public async Task Throw_update_author_if_author_is_null_exception()
+        {
+            var dummyId = 354;
+            var dto = UpdateAuthorDtoFactory.Create();
+
+            var actual = () => _sut.Update(dummyId,dto);
+
+
+            await actual.Should().ThrowExactlyAsync<ThrowUpdatesAuthorIfAuthorIsNullException>();
         }
     }
 }

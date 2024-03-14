@@ -36,5 +36,17 @@ namespace NewspaperPublishing.Spec.Tests.Authors
             _repository.Delete(author);
             await _unitOfWork.Complete();
         }
+
+        public async Task Update(int id, UpdateAuthorDto dto)
+        {
+            var author=_repository.FindAuthorById(id);
+            if(author == null)
+            {
+                throw new ThrowUpdatesAuthorIfAuthorIsNullException();
+            }
+            author.FirstName= dto.FirstName;
+            author.LastName= dto.LastName;
+            await _unitOfWork.Complete();
+        }
     }
 }

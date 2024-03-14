@@ -22,5 +22,10 @@ namespace NewspaperPublishing.RestApi.Controllers.Authors
         {
             await _service.Delete(id);
         }
+        [HttpPatch]
+        public async Task Update([FromQuery]int id, [FromBody]UpdateAuthorDto dto)
+        {
+            await _service.Update(id, dto);
+        }
     }
 }
