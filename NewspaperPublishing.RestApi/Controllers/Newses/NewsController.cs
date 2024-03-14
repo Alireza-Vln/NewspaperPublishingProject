@@ -25,5 +25,10 @@ namespace NewspaperPublishing.RestApi.Controllers.Newses
         {
             await _service.Update(newsId, newsDto);
         }
+        [HttpDelete]
+        public async Task DeleteNews([FromQuery] int newsId)
+        {
+            await _service.Delete(newsId);
+        }
     }
 }

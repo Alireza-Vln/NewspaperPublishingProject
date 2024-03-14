@@ -23,6 +23,11 @@ namespace NewspaperPublishing.Persistence.EF.Newses
             _news.Add(news);
         }
 
+        public void Delete(News? news)
+        {
+            _news.Remove(news);
+        }
+
         public News? FindCategoryByNews(int categoryId)
         {
            return _news.FirstOrDefault(_=>_.CategoryId == categoryId);

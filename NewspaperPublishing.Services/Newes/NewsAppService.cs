@@ -2,6 +2,7 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Newes.Contracts.Exeptions;
 using NewspaperPublishing.Services.Unit.Tests.Newses;
@@ -14,18 +15,20 @@ namespace NewspaperPublishing.Spec.Tests.Newses
 {
     public class NewsAppService : NewsService
     {
-        readonly NewsRepository _repository;
+        readonly NewsRepository _newsRepository;
         readonly UnitOfWork _unitOfWork;
         private CategoryRepository _categoryRepository;
         private AuthorRepository _authorRepository;
         private TagRepository _tagRepository;
+        private NewspaperRepository _newspaperRepository;
         public NewsAppService(NewsRepository repository,
             UnitOfWork unitOfWork,
             CategoryRepository categoryRepository,
             AuthorRepository authorRepository,
-            TagRepository tagRepository)
+            TagRepository tagRepository,
+            NewspaperRepository newspaperRepository)
         {
-            _repository = repository;
+            _newsRepository = repository;
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
             _authorRepository = authorRepository;
@@ -63,16 +66,30 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 AuthorId=author.Id,
                
             };
-            _repository.Add(news);
+            _newsRepository.Add(news);
             await _unitOfWork.Complete();
-
-
             
+        }
+
+        public async Task Delete(int id)
+        {
+            var news= _newsRepository.FindNewsById(id);
+            if (news == null)
+            {
+
+            }
+            if(_newspaperRepository.FindNewspaperByNews
+                (news.Id) != null)
+            {
+                throw new ThrowDeleteNewsThatHasBeenPublishedException();
+            }
+            _newsRepository.Delete(news);
+            await _unitOfWork.Complete();
         }
 
         public async Task Update(int id, UpdateNewsDto dto)
         {
-            var news= _repository.FindNewsById(id);
+            var news= _newsRepository.FindNewsById(id);
             if (news == null)
             {
                 throw new ThrowUpdateNewsIfNewsIsNullException();

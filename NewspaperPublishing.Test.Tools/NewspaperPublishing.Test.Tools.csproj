@@ -38,6 +38,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Authors\Builders\" />
+	  <Folder Include="Newspapers\Factories\" />
 	</ItemGroup>
 
 </Project>

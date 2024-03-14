@@ -12,7 +12,6 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                 Title = "dummy-title",
                 Weight = 5,
                 AuthorId = 1,
-               
                 CategoryId = 1,
                 
 
