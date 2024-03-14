@@ -11,7 +11,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
             return new AddNewsDto()
             {
                 Title = "dummy-title ",
-                Weigh = 5,
+                Weight = 5,
                 TagId = new List<int>
                 {
                  tagId1?? 1,

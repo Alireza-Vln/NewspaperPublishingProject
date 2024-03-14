@@ -33,6 +33,10 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             return _news;
         }
 
-       
+        public NewsBuilder WithWeight(int weight)
+        {
+            _news.Weight = weight;
+            return this;
+        }
     }
 }

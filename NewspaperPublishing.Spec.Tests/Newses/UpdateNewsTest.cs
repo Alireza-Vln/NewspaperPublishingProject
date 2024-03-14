@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
+using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Spec.Tests.Authors;
+using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Integration;
@@ -16,74 +18,68 @@ using Xunit;
 
 namespace NewspaperPublishing.Spec.Tests.Newses
 {
-    [Scenario(" اضافه کردن خبر")]
+    [Scenario("ویرایش کردن خبر ")]
     [Story("",
-    AsA = " ناشر",
-    IWantTo = " خبر خود را اضافه کنم",
-    InOrderTo = "خبر را منتشر کنم ")]
+     AsA = " ",
+     IWantTo = "خبر خود را ویرایش کنم  ",
+     InOrderTo = "بتوانم خبر را به روز رسانی کنم ")]
 
-    public class AddNewsTest : BusinessIntegrationTest
+    public class UpdateNewsTest : BusinessIntegrationTest
     {
         readonly NewsService _sut;
         private Category _category;
+        private News _news;
         private Tag _tag;
-        private Tag _tag2;
         private Author _author;
-        public AddNewsTest()
+        public UpdateNewsTest()
         {
             _sut = NewsAppServiceFactory.Create(SetupContext);
         }
-        [Given("در فهرست خبر ها خبری وجود ندارد ")]
+
+        [Given("در فهرست خبر ها خبری  با عنوان کشته شدن داریوش مهرجویی با وزن 10 وجود دارد ")]
         [And("برچسبی به عنوان قتل در در دسته بندی جنابی وجود دارد")]
-        [And("برچسبی به عنوان سرقت در در دسته بندی جنابی وجود دارد")]
         [And("نویسنده ای به اسم علیرضا وفامیل ولدان وجود دارد")]
         private void Given()
         {
             _category = new CategoryBuilder()
-                .WithTitle("جنایی")
-                .Build();
+               .WithTitle("جنایی")
+               .Build();
             DbContext.Save(_category);
             _tag = new TagBuilder()
                 .WithCategoryId(_category.Id)
                 .WithTitle("قتل")
                 .Build();
-            DbContext.Save(_tag);
-            _tag2 = new TagBuilder()
-               .WithCategoryId(_category.Id)
-               .WithTitle("سرقت")
-               .Build();
-            DbContext.Save(_tag2);
+            DbContext.Save(_tag); 
             _author = new AuthorBuilder()
                 .WithFirstName("علیرضا")
                 .WithLastName("ولدان")
                 .Build();
             DbContext.Save(_author);
+            _news=new NewsBuilder()
+                .WithCategoryId(_category.Id)
+                .WithAuthorId(_author.Id)
+                .WithWeight(10)
+                .Build();
+            DbContext.Save(_news);
+
         }
-        [When(" خبری به عنوان کشته شدن داریوش مهرجویی با وزن 5 اضافه میکنیم")]
+        [When(" خبری به عنوان کشته شدن مردی در کوچه با وزن 5 ویرایش میکنیم")]
         private async Task When()
         {
-            var dto = new AddNewsDto()
+            var dto = new UpdateNewsDto()
             {
-                Title = "کشته شدن داریوش مهرجویی ",
-                Weight = 5,
-                TagId = new List<int>
-                {
-                    _tag.Id,
-                    _tag2.Id,
-                }
+                Title = "کشته شدن مردی در کوچه",
+                Weight=5
             };
-            await _sut.Add(_category.Id,_author.Id, dto);   
+           await _sut.Update(_news.Id, dto);
+
         }
-        [Then(" یک دسته بندی در فهرست خبر ها با عنوان کشته شدن داریوش مهرجویی با وزن 5 وجود دارد ")]
+        [Then(" یک دسته بندی با عنوان کشته شدن مردی در کوچه با وزن 5  فهرست خبر ها  وجود دارد ")]
         private void Then()
         {
-            var actual = ReadContext.Newses.Single();
-            actual.Title.Should().Be("کشته شدن داریوش مهرجویی ");
+            var actual=ReadContext.Newses.FirstOrDefault(_=>_.Id==_news.Id);
+            actual.Title.Should().Be("کشته شدن مردی در کوچه");
             actual.Weight.Should().Be(5);
-            actual.AuthorId.Should().Be(_author.Id);
-            actual.CategoryId.Should().Be(_category.Id);
-           
-
         }
         [Fact]
         public void Run()
@@ -95,4 +91,3 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         }
     }
 }
-

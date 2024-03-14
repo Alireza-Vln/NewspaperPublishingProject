@@ -27,5 +27,10 @@ namespace NewspaperPublishing.Persistence.EF.Newses
         {
            return _news.FirstOrDefault(_=>_.CategoryId == categoryId);
         }
+
+        public News? FindNewsById(int id)
+        {
+            return _news?.FirstOrDefault(_=>_.Id == id);
+        }
     }
 }

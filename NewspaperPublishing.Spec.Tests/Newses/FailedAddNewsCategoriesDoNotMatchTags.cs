@@ -70,7 +70,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             var dto = new AddNewsDto()
             {
                 Title = "کشته شدن داریوش مهرجویی ",
-                Weigh = 5,
+                Weight = 5,
                 TagId = new List<int>
                 {
                     _tag.Id,

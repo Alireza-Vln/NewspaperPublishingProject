@@ -21,12 +21,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
 {
     public class AddNewsServiceTests : BusinessUnitTest
     {
-        readonly NewsService _sut;
-        //private Category _category;
-        //private Category _category2;
-        //private Tag _tag;
-        //private Tag _tag2;
-        //private Author _author; 
+        readonly NewsService _sut;     
         public AddNewsServiceTests()
         {
             _sut = NewsAppServiceFactory.Create(SetupContext);
@@ -48,23 +43,15 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
             var author = new AuthorBuilder().Build();
             DbContext.Save(author);
 
-            var dto = new AddNewsDto()
-            {
-                Title = "dummy-title ",
-                Weigh = 5,
-                TagId = new List<int>
-                {
-                    tag1.Id,
-                    tag2.Id,
-                }
-            };
+            var dto = AddNewsDtoFactory
+                .Create(tag1.Id, tag2.Id);
             await _sut.Add(category.Id, author.Id, dto);
 
             var actual = ReadContext.Newses.Single();
             actual.Title.Should().Be(dto.Title);
             actual.AuthorId.Should().Be(author.Id);
             actual.CategoryId.Should().Be(category.Id);
-            actual.Weight.Should().Be(dto.Weigh);
+            actual.Weight.Should().Be(dto.Weight);
         }
         [Fact]
         public async Task Throw_add_news_categories_do_not_match_tags_exception()

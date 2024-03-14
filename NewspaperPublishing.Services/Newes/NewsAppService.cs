@@ -58,7 +58,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             var news = new News
             {
                 Title = dto.Title,
-                Weight = dto.Weigh,
+                Weight = dto.Weight,
                 CategoryId = category.Id,
                 AuthorId=author.Id,
                
@@ -68,6 +68,19 @@ namespace NewspaperPublishing.Spec.Tests.Newses
 
 
             
+        }
+
+        public async Task Update(int id, UpdateNewsDto dto)
+        {
+            var news= _repository.FindNewsById(id);
+            if (news == null)
+            {
+                throw new ThrowUpdateNewsIfNewsIsNullException();
+            }
+            news.Title= dto.Title;
+            news.Weight = dto.Weight;
+
+            await _unitOfWork.Complete();
         }
     }
 }

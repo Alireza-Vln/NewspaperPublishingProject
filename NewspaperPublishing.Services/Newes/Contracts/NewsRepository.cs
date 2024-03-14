@@ -12,5 +12,6 @@ namespace NewspaperPublishing.Services.Newes.Contracts
     {
         void Add(News news);
         News? FindCategoryByNews(int categoryId);
+        News? FindNewsById(int id);
     }
 }
