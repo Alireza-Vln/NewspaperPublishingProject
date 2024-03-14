@@ -33,6 +33,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             _categoryRepository = categoryRepository;
             _authorRepository = authorRepository;
             _tagRepository = tagRepository;
+            _newspaperRepository= newspaperRepository;
 
         }
 
@@ -76,7 +77,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             var news= _newsRepository.FindNewsById(id);
             if (news == null)
             {
-
+                throw new ThrowDeleteNewsIfNewsIsException();
             }
             if(_newspaperRepository.FindNewspaperByNews
                 (news.Id) != null)
