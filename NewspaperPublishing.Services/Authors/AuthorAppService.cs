@@ -1,5 +1,6 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Authors;
+using NewspaperPublishing.Services.Unit.Tests.Authors;
 
 namespace NewspaperPublishing.Spec.Tests.Authors
 {
@@ -22,6 +23,17 @@ namespace NewspaperPublishing.Spec.Tests.Authors
                 LastName = dto.LastName,
             };
             _repository.Add(Author);
+            await _unitOfWork.Complete();
+        }
+
+        public async Task Delete(int id)
+        {
+            var author= _repository.FindAuthorById(id);
+            if (author == null)
+            {
+                throw new ThrowDeletesAuthorIfAuthorIsNullException();
+            }
+            _repository.Delete(author);
             await _unitOfWork.Complete();
         }
     }

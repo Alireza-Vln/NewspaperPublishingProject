@@ -3,6 +3,7 @@ using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Persistence.EF;
 using NewspaperPublishing.Persistence.EF.Newses;
 using NewspaperPublishing.Services.Newes.Contracts;
+using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Tags;
 
@@ -25,6 +26,8 @@ builder.Services.AddScoped<CategoryRepository,EFCategoryRepository>();
 builder.Services.AddScoped<TagService, TagAppService>();
 builder.Services.AddScoped<TagRepository,EFTagRepository>();
 builder.Services.AddScoped<NewsRepository,EFNewsRepository>();
+builder.Services.AddScoped<AuthorService,AuthorAppService>();
+builder.Services.AddScoped<AuthorRepository, EFAuthorRepository>();
 
 var app = builder.Build();
 

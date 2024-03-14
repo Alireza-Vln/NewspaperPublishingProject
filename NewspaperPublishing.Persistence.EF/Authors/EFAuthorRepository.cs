@@ -16,5 +16,15 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         {
            _authors.Add(author);
         }
+
+        public void Delete(Author author)
+        {
+            _authors.Remove(author);
+        }
+
+        public Author? FindAuthorById(int id)
+        {
+            return _authors.FirstOrDefault(_ => _.Id == id);
+        }
     }
 }
