@@ -3,9 +3,12 @@ using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Services.Newes.Contracts;
+using NewspaperPublishing.Services.Newes.Contracts.Exeptions;
+using NewspaperPublishing.Services.Unit.Tests.Newses;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Tags;
+using System.Runtime.Serialization;
 
 namespace NewspaperPublishing.Spec.Tests.Newses
 {
@@ -35,20 +38,17 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             var category= _categoryRepository.FindCategoryById(categoryId);
             if (category == null)
             {
-
+                throw new ThrowAddNewsIfCategoryIsNullException();
             }
             var author=_authorRepository.FindAuthorById(authorId);
             if(author == null)
             {
-
+                throw new ThrowAddNewsIfAuthorIsNullException();
             }  
             foreach (var i in dto.TagId)
             {
                 var tag= _tagRepository.FindTagById(i);
-                if (tag == null)
-                {
-
-                }
+             
                 if(tag.CategoryId != category.Id)
                 {
                     throw new ThrowAddNewsCategoriesDoNotMatchTagsException();
