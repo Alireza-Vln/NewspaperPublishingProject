@@ -1,5 +1,6 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Authors;
+using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Unit.Tests.Authors;
 
 namespace NewspaperPublishing.Spec.Tests.Authors
@@ -35,6 +36,11 @@ namespace NewspaperPublishing.Spec.Tests.Authors
             }
             _repository.Delete(author);
             await _unitOfWork.Complete();
+        }
+
+        public async Task<List<GetAuthorsDto>> Get()
+        {
+             return _repository.GetAll(); 
         }
 
         public async Task Update(int id, UpdateAuthorDto dto)

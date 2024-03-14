@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Persistence.EF;
+using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 
 namespace NewspaperPublishing.Spec.Tests.Authors
 {
@@ -25,6 +26,21 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         public Author? FindAuthorById(int id)
         {
             return _authors.FirstOrDefault(_ => _.Id == id);
+        }
+
+        public List<GetAuthorsDto> GetAll()
+        {
+            var author = _authors.Select
+                 (_ => new GetAuthorsDto
+                 {
+                     Id = _.Id,
+                     FirstName = _.FirstName,
+                     LastName = _.LastName,
+                     
+                 }).ToList();
+            
+            return author;
+
         }
     }
 }

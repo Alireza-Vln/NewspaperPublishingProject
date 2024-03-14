@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Spec.Tests.Authors;
 
 namespace NewspaperPublishing.RestApi.Controllers.Authors
@@ -26,6 +27,11 @@ namespace NewspaperPublishing.RestApi.Controllers.Authors
         public async Task Update([FromQuery]int id, [FromBody]UpdateAuthorDto dto)
         {
             await _service.Update(id, dto);
+        }
+        [HttpGet]
+        public async Task<List<GetAuthorsDto>> GetAll()
+        {
+           return await _service.Get();
         }
     }
 }
