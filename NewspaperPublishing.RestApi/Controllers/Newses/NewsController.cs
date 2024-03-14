@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewspaperPublishing.Services.Newes.Contracts.Dtos;
+using NewspaperPublishing.Services.Unit.Tests.Newses;
 using NewspaperPublishing.Spec.Tests.Newses;
 
 namespace NewspaperPublishing.RestApi.Controllers.Newses
@@ -30,5 +32,11 @@ namespace NewspaperPublishing.RestApi.Controllers.Newses
         {
             await _service.Delete(newsId);
         }
+        [HttpGet]
+        public async Task<List<GetNewsDto>> Get([FromQuery] FiltersNewsDto dto)
+        {
+            return await _service.Get(dto);
+        }
+                                                    
     }
 }

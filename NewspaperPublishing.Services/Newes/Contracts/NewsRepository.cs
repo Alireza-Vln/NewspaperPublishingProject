@@ -1,5 +1,8 @@
 ﻿using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
+using NewspaperPublishing.Services.Newes.Contracts.Dtos;
+using NewspaperPublishing.Services.Unit.Tests.Newses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +17,6 @@ namespace NewspaperPublishing.Services.Newes.Contracts
         void Delete(News? news);
         News? FindCategoryByNews(int categoryId);
         News? FindNewsById(int id);
+        List<GetNewsDto> Get(FiltersNewsDto dto);
     }
 }

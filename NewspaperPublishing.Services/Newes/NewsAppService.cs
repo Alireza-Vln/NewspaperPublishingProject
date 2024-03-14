@@ -3,7 +3,9 @@ using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Persistence.EF.Newspapers;
+using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
+using NewspaperPublishing.Services.Newes.Contracts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts.Exeptions;
 using NewspaperPublishing.Services.Unit.Tests.Newses;
 using NewspaperPublishing.Spec.Tests.Authors;
@@ -86,6 +88,11 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             }
             _newsRepository.Delete(news);
             await _unitOfWork.Complete();
+        }
+
+        public async Task<List<GetNewsDto>> Get(FiltersNewsDto filter)
+        {
+            return _newsRepository.Get(filter);
         }
 
         public async Task Update(int id, UpdateNewsDto dto)

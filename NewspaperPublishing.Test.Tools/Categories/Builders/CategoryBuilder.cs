@@ -14,7 +14,7 @@ namespace NewspaperPublishing.Test.Tools.Categories.Builders
         {
             _category = new Category()
             {
-                Title = "dummyTitle",
+                Title = "dummy-title",
                 Weight = 20,
             };
         }

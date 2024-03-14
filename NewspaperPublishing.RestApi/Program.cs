@@ -2,9 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Persistence.EF;
 using NewspaperPublishing.Persistence.EF.Newses;
+using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
+using NewspaperPublishing.Spec.Tests.Newses;
 using NewspaperPublishing.Spec.Tests.Tags;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,8 +28,10 @@ builder.Services.AddScoped<CategoryRepository,EFCategoryRepository>();
 builder.Services.AddScoped<TagService, TagAppService>();
 builder.Services.AddScoped<TagRepository,EFTagRepository>();
 builder.Services.AddScoped<NewsRepository,EFNewsRepository>();
+builder.Services.AddScoped<NewsService, NewsAppService>();
 builder.Services.AddScoped<AuthorService,AuthorAppService>();
 builder.Services.AddScoped<AuthorRepository, EFAuthorRepository>();
+builder.Services.AddScoped<NewspaperRepository, EFNewspaperRepository>();
 
 var app = builder.Build();
 
