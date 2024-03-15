@@ -74,8 +74,6 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 NewspaperId=_newspaper.Id
 
             };
-            _newspaper.NewspaperNews.Add(_newspaperNews);
-            DbContext.Save(_newspaper);
             DbContext.Save(_newspaperNews);
 
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Newes.Contracts.Dtos;
@@ -16,9 +17,11 @@ namespace NewspaperPublishing.Persistence.EF.Newses
     public class EFNewsRepository : NewsRepository
     {
         readonly DbSet<News> _news;
+        readonly DbSet<NewspaperNews> _newspaperNews;
         public EFNewsRepository(EFDataContext context)
         {
             _news = context.Newses;
+            _newspaperNews = context.NewspaperNewses;
         }
 
         public void Add(News news)
@@ -63,6 +66,10 @@ namespace NewspaperPublishing.Persistence.EF.Newses
                 news = news.Where(_ => _.AuthorName == filterDto.Author);
             }
             return news.ToList();
+        }
+        public NewspaperNews? FindNewspaperByNews(int newsId)
+        {
+            return _newspaperNews.FirstOrDefault(_ => _.NewsId == newsId);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
     public interface NewspaperRepository    
     {
         void Add(Newspaper newspaper);
-        bool FindNewspaperByNews(int newsId);
+       
     }
 }

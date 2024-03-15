@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Newses;
@@ -62,10 +63,15 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
                 .WithAuthorId(author.Id)
                 .Build();
             DbContext.Save(news);
-            var newspaper=new NewspaperBuilder()
-                .WithNewsId(news.Id)
+            var newspaper=new NewspaperBuilder() 
                 .Build();
             DbContext.Save(newspaper);
+            var newspaperNews = new NewspaperNews()
+            {
+                NewsId = news.Id,
+                NewspaperId = newspaper.Id
+            };
+            DbContext.Save(newspaperNews);
 
             var actual=()=>_sut.Delete(news.Id);
 

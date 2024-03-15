@@ -1,5 +1,6 @@
 ﻿using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts.Dtos;
 using NewspaperPublishing.Services.Unit.Tests.Newses;
@@ -18,5 +19,6 @@ namespace NewspaperPublishing.Services.Newes.Contracts
         News? FindCategoryByNews(int categoryId);
         News? FindNewsById(int id);
         List<GetNewsDto> Get(FiltersNewsDto dto);
+        NewspaperNews? FindNewspaperByNews(int newsId);
     }
 }

@@ -6,6 +6,7 @@ using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Categories.Factories;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
+using NewspaperPublishing.Test.Tools.Tags.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,9 +57,14 @@ namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests
 
             };
             DbContext.Save(author);
+            var tag = new TagBuilder()
+                .WithCategoryId(category.Id)
+                .Build();
+            DbContext.Save(tag);
             var news=new NewsBuilder()
                 .WithAuthorId(author.Id)
                 .WithCategoryId(category.Id)
+                .WithTags(tag.Id)
                 .Build();
             DbContext.Save(news);
             

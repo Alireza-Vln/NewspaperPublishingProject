@@ -12,10 +12,11 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
     public class EFNewspaperRepository : NewspaperRepository
     {
         readonly DbSet<Newspaper> _newspaper;
-        readonly DbSet<NewspaperNews> _newspaperNews;
+       
         public EFNewspaperRepository(EFDataContext context)
         {
             _newspaper = context.Newspapers;
+           
         }
 
         public void Add(Newspaper newspaper)
@@ -23,9 +24,6 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
             _newspaper.Add(newspaper);
         }
 
-        public bool FindNewspaperByNews(int newsId)
-        {
-            return _newspaperNews.Any(_ => _.NewsId == newsId);
-        }
+       
     }
 }

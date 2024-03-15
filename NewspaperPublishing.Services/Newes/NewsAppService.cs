@@ -84,11 +84,11 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             {
                 throw new ThrowDeleteNewsIfNewsIsException();
             }
-            //if (_newspaperRepository.FindNewspaperByNews
-            //    (news.Id) == false)
-            //{
-            //    throw new ThrowDeleteNewsThatHasBeenPublishedException();
-            //}
+            var x = _newsRepository.FindNewspaperByNews(news.Id);
+            if (x != null)
+            {
+                throw new ThrowDeleteNewsThatHasBeenPublishedException();
+            }
             _newsRepository.Delete(news);
             await _unitOfWork.Complete();
         }
