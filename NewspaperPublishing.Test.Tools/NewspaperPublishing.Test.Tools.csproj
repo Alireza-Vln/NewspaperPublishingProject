@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\NewspaperPublishing.Contracts\NewspaperPublishing.Contracts.csproj" />
+	  <ProjectReference Include="..\NewspaperPublishing.Infrastructure\NewspaperPublishing.Infrastructure.csproj" />
 	  <ProjectReference Include="..\NewspaperPublishing.Persistence.EF\NewspaperPublishing.Persistence.EF.csproj" />
 	  <ProjectReference Include="..\NewspaperPublishing.Services\NewspaperPublishing.Services.csproj" />
 	</ItemGroup>
@@ -38,7 +39,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Authors\Builders\" />
-	  <Folder Include="Newspapers\Factories\" />
 	</ItemGroup>
 
 </Project>

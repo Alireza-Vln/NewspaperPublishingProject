@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Newspapers\Contracts\Dtos\" />
     <Folder Include="Newspapers\Contracts\Exceptions\" />
   </ItemGroup>
 

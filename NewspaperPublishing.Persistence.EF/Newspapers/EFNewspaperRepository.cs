@@ -18,7 +18,7 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
 
         public Newspaper? FindNewspaperByNews(int newsId)
         {
-            return _newspaper.FirstOrDefault(_=>_.NewsId== newsId); 
+            throw new NotImplementedException();
         }
     }
 }

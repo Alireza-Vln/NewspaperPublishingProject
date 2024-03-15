@@ -27,6 +27,11 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             _news.AuthorId= AuthorId;
             return this;
         }
+        public NewsBuilder WithTitle(string Title)
+        {
+            _news.Title = Title;
+            return this;
+        }
         public News Build()
         {
             return _news;

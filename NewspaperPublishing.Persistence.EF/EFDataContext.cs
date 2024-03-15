@@ -2,7 +2,10 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperCategories;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
+using NewspaperPublishing.Entities.NewsTags;
 using NewspaperPublishing.Entities.Tags;
 using System;
 using System.Collections.Generic;
@@ -24,6 +27,9 @@ namespace NewspaperPublishing.Persistence.EF
         public DbSet<Newspaper> Newspapers { get; set; }
         public DbSet<News> Newses { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<NewsTag> NewsTags { get; set; }
+        public DbSet<NewspaperCategory> NewspaperCategories { get; set; }
+        public DbSet <NewspaperNews> NewspaperNewses { get; set; }
 
         public EFDataContext(DbContextOptions options) : base(options)
         {

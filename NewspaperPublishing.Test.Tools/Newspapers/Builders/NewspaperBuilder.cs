@@ -10,7 +10,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             _newspaper = new Newspaper()
             {
                 Title = "dummy-title",
-                NewsId = 1,
+               
                 Date = new DateTime(2020, 10, 10)
 
             };
@@ -18,7 +18,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         }
         public NewspaperBuilder WithNewsId(int newsId)
         {
-            _newspaper.NewsId =newsId;
+            
             return this;
         }
         public Newspaper Build()
