@@ -2,6 +2,7 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewsTags;
 using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
@@ -43,16 +44,26 @@ namespace NewspaperPublishing.Spec.Tests.Newses
 
         public async Task Add(int categoryId, int authorId, AddNewsDto dto)
         {
+            
             var category= _categoryRepository.FindCategoryById(categoryId);
             if (category == null)
             {
                 throw new ThrowAddNewsIfCategoryIsNullException();
             }
+     
             var author=_authorRepository.FindAuthorById(authorId);
             if(author == null)
             {
                 throw new ThrowAddNewsIfAuthorIsNullException();
-            }  
+            }
+            var news = new News
+            {
+                Title = dto.Title,
+                Weight = dto.Weight,
+                CategoryId = category.Id,
+                AuthorId = author.Id,
+
+            };
             foreach (var i in dto.TagId)
             {
                 var tag= _tagRepository.FindTagById(i);
@@ -61,17 +72,22 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 {
                     throw new ThrowAddNewsCategoriesDoNotMatchTagsException();
                 }
-                
+                var newsTag = new NewsTag()
+                {
+                    TagId = tag.Id
+                };
+                news.NewsTags.Add(newsTag);
             }
            
-            var news = new News
-            {
-                Title = dto.Title,
-                Weight = dto.Weight,
-                CategoryId = category.Id,
-                AuthorId=author.Id,
+            //var news = new News
+            //{
+            //    Title = dto.Title,
+            //    Weight = dto.Weight,
+            //    CategoryId = category.Id,
+            //    AuthorId=author.Id,
+            //    NewsTags=
                
-            };
+            //};
             _newsRepository.Add(news);
             await _unitOfWork.Complete();
             

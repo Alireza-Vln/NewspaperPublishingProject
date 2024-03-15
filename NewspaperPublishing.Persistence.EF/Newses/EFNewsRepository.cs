@@ -2,6 +2,7 @@
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewspaperNewses;
+using NewspaperPublishing.Entities.NewsTags;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Newes.Contracts.Dtos;
@@ -47,16 +48,19 @@ namespace NewspaperPublishing.Persistence.EF.Newses
         public List<GetNewsDto> Get(FiltersNewsDto filterDto)
         {
             var news = _news.Include(_ => _.Category)
-                 .ThenInclude(_ => _.Tags).Include(_ => _.Author)
+                 .Include(_ => _.NewsTags).ThenInclude(_=>_.Tag).Include(_ => _.Author)
                  .Select(_ => new GetNewsDto
                  {
                      Id = _.Id,
                      Title = _.Title,
                      CategoryTitle = _.Category.Title,
                      AuthorName = _.Author.LastName,
-                     Tags = _.Category.Tags.Select(_ => _.Title).ToList()
+                     Tags= _.NewsTags.Select(_=>_.Tag.Title).ToList(),
 
                  });
+          
+
+
             if(filterDto.Category != null)
             {
                 news = news.Where(_ => _.CategoryTitle == filterDto.Category);

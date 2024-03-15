@@ -37,6 +37,10 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                     throw new Exception();
                 }
                 weight =weight+news1.Weight;
+                foreach (var Category in dto.CategoryId)
+                {
+                    if (news1.CategoryId == Category) { }
+                };
               
             }
             var newspaper = new Newspaper
