@@ -119,7 +119,12 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                     _news2.Id,
                     _news3.Id,
                     _news4.Id,
+                },
+                CategoryId=new List<int>
+                {
+                    _category.Id, 
                 }
+                
             };
             await _sut.Add(_dto);
         }
@@ -128,8 +133,8 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
         {
             var actual = ReadContext.Newspapers.Single();
             actual.Title.Should().Be("خبر فارس");
-          //  actual.NewspaperNews.Should().AllBeOfType<News>();
             actual.Date.Should().Be(_fakeTime);
+            actual.Weight.Should().Be(20);
         }
         [Fact]
         public void Run()

@@ -1,4 +1,6 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
+using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperCategories;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Newes.Contracts;
@@ -11,6 +13,7 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
         readonly UnitOfWork _unitOfWork;
         readonly DateTimeService _dateService;
         readonly NewsRepository _newsRepository;
+        private List<NewspaperCategory> newsList;
         public NewspaperAppService(NewspaperRepository repository,
             UnitOfWork unitOfWork,
             DateTimeService dateService,
@@ -25,33 +28,25 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
 
         public async Task Add(AddNewspaperDto dto)
         {
-            
+            var weight = 0;
             foreach (var newsId in dto.newsId)
             {
-               var news= _newsRepository.FindNewsById(newsId);
-                if (news == null)
+               var news1= _newsRepository.FindNewsById(newsId);
+                if (news1 == null)
                 {
-
+                    throw new Exception();
                 }
-                news.Category.Weight = -news.Weight;
-                     
+                weight =weight+news1.Weight;
+              
             }
-            foreach(var newsId in dto.newsId)
-            {
-                var news = _newsRepository.FindNewsById(newsId);
-                if(news.Category.Weight != 0)
-                {
-
-                }
-
-            }
-
             var newspaper = new Newspaper
             {
                 Title = dto.Title,
-               
                 Date = _dateService.Now(),   
+                Weight = weight,
+               
             };
+            
             _newspaperRepository.Add(newspaper);
             await _unitOfWork.Complete();
           
