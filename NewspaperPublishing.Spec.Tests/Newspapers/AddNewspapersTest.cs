@@ -1,4 +1,5 @@
-﻿using NewspaperPublishing.Contracts.Interfaces;
+﻿using FluentAssertions;
+using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
@@ -36,6 +37,7 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
         private News _news3;
         private News _news4;
         private Author _author;
+        private AddNewspaperDto _dto;
 
         public AddNewspapersTest()
         {
@@ -108,7 +110,7 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
         [When("خبرهای مذکور با عنوان خبر فارس با تاریخ امروز را منتشر  میکنیم ")]
         private async Task When()
         {
-            var dto = new AddNewspaperDto()
+            _dto = new AddNewspaperDto()
             {
                 Title = "خبر فارس",
                 newsId = new List<int>
@@ -119,12 +121,15 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                     _news4.Id,
                 }
             };
-            await _sut.Add(dto);
+            await _sut.Add(_dto);
         }
         [Then(" یک دسته بندی با خبرهای مذکور و تاریخ امروز با وزن 20 داریم  ")]
         private void Then()
         {
-
+            var actual = ReadContext.Newspapers.Single();
+            actual.Title.Should().Be("خبر فارس");
+          //  actual.NewspaperNews.Should().AllBeOfType<News>();
+            actual.Date.Should().Be(_fakeTime);
         }
         [Fact]
         public void Run()

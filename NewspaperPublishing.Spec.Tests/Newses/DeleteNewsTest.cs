@@ -2,6 +2,8 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperNewses;
+using NewspaperPublishing.Entities.NewsTags;
 using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
@@ -25,6 +27,8 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         private News _news;
         private Tag _tag;
         private Author _author;
+        private NewsTag _newsTag;
+     
         public DeleteNewsTest()
         {
             _sut = NewsAppServiceFactory.Create(SetupContext);
@@ -55,6 +59,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 .WithWeight(10)
                 .Build();
             DbContext.Save(_news);
+            
         }
         [When("خبری به عنوان کشته شدن داریوش مهرجویی با وزن 5 حذف میکنیم ")]
         private async Task When()

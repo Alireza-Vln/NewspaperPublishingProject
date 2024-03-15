@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,20 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
     public class EFNewspaperRepository : NewspaperRepository
     {
         readonly DbSet<Newspaper> _newspaper;
+        readonly DbSet<NewspaperNews> _newspaperNews;
         public EFNewspaperRepository(EFDataContext context)
         {
             _newspaper = context.Newspapers;
         }
 
-        public Newspaper? FindNewspaperByNews(int newsId)
+        public void Add(Newspaper newspaper)
         {
-            throw new NotImplementedException();
+            _newspaper.Add(newspaper);
+        }
+
+        public bool FindNewspaperByNews(int newsId)
+        {
+            return _newspaperNews.Any(_ => _.NewsId == newsId);
         }
     }
 }

@@ -49,9 +49,11 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
             var newspaper = new Newspaper
             {
                 Title = dto.Title,
-               // NewsIds = dto.newsId.ToHashSet(),
+               
                 Date = _dateService.Now(),   
             };
+            _newspaperRepository.Add(newspaper);
+            await _unitOfWork.Complete();
           
 
         }

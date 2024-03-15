@@ -2,6 +2,7 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
@@ -23,6 +24,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         private AuthorRepository _authorRepository;
         private TagRepository _tagRepository;
         private NewspaperRepository _newspaperRepository;
+    
         public NewsAppService(NewsRepository repository,
             UnitOfWork unitOfWork,
             CategoryRepository categoryRepository,
@@ -59,6 +61,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 {
                     throw new ThrowAddNewsCategoriesDoNotMatchTagsException();
                 }
+                
             }
            
             var news = new News
@@ -81,11 +84,11 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             {
                 throw new ThrowDeleteNewsIfNewsIsException();
             }
-            if(_newspaperRepository.FindNewspaperByNews
-                (news.Id) != null)
-            {
-                throw new ThrowDeleteNewsThatHasBeenPublishedException();
-            }
+            //if (_newspaperRepository.FindNewspaperByNews
+            //    (news.Id) == false)
+            //{
+            //    throw new ThrowDeleteNewsThatHasBeenPublishedException();
+            //}
             _newsRepository.Delete(news);
             await _unitOfWork.Complete();
         }

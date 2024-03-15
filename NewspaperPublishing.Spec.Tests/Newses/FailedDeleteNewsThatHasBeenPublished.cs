@@ -2,6 +2,7 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
+using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Spec.Tests.Authors;
@@ -32,6 +33,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         private Tag _tag;
         private Author _author;
         private Newspaper _newspaper;
+        private NewspaperNews _newspaperNews;
         private Func<Task> _actual;
         public FailedDeleteNewsThatHasBeenPublished()
         {
@@ -63,10 +65,18 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 .WithWeight(10)
                 .Build();
             DbContext.Save(_news);
-            _newspaper=new NewspaperBuilder()
-                .WithNewsId(_news.Id)
+            _newspaper=new NewspaperBuilder() 
                 .Build();
             DbContext.Save(_newspaper);
+            _newspaperNews = new NewspaperNews
+            {
+                NewsId = _news.Id,
+                NewspaperId=_newspaper.Id
+
+            };
+            _newspaper.NewspaperNews.Add(_newspaperNews);
+            DbContext.Save(_newspaper);
+            DbContext.Save(_newspaperNews);
 
 
         }
