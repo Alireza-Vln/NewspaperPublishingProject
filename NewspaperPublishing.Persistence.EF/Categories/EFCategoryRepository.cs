@@ -44,6 +44,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                      Title = _.Title,
                      Weight = _.Weight,
                      View = _.View,
+                     TagTitle=_.Tags.Select(_=>_.Title).ToList(),
                      
                  }).ToList();
             

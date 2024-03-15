@@ -77,17 +77,8 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                     TagId = tag.Id
                 };
                 news.NewsTags.Add(newsTag);
-            }
-           
-            //var news = new News
-            //{
-            //    Title = dto.Title,
-            //    Weight = dto.Weight,
-            //    CategoryId = category.Id,
-            //    AuthorId=author.Id,
-            //    NewsTags=
-               
-            //};
+            }          
+    
             _newsRepository.Add(news);
             await _unitOfWork.Complete();
             
