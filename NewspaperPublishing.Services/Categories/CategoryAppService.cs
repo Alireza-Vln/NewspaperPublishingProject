@@ -43,7 +43,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             {
                 throw new ThrowDeletesCategoryIfCategoryIsNullException();
             }
-            if(_newsRepository.FindCategoryByNews(category.Id)!=null)
+            if(_newsRepository.FindNewsByCategory(category.Id)!=null)
             {
                 throw new ThrowDeleteTheCategoryHasNewsException();
             }

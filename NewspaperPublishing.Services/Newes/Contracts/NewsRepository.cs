@@ -16,7 +16,7 @@ namespace NewspaperPublishing.Services.Newes.Contracts
     {
         void Add(News news);
         void Delete(News? news);
-        News? FindCategoryByNews(int categoryId);
+        News? FindNewsByCategory(int categoryId);
         News? FindNewsById(int id);
         List<GetNewsDto> Get(FiltersNewsDto dto);
         NewspaperNews? FindNewspaperByNews(int newsId);

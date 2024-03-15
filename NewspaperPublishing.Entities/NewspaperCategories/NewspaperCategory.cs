@@ -12,7 +12,7 @@ namespace NewspaperPublishing.Entities.NewspaperCategories
     {
         public int Id { get; set; }
         public Category Category { get; set; }
-        public int? CategoryId { get; set; } = null;
+        public int CategoryId { get; set; } 
         public Newspaper Newspaper { get; set; }
         public int NewspaperId { get; set; }
     }

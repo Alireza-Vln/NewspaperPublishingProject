@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewspaperPublishing.Infrastructure\NewspaperPublishing.Infrastructure.csproj" />
     <ProjectReference Include="..\NewspaperPublishing.Persistence.EF\NewspaperPublishing.Persistence.EF.csproj" />
   </ItemGroup>
 

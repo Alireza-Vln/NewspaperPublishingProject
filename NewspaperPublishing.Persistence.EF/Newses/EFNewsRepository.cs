@@ -35,7 +35,7 @@ namespace NewspaperPublishing.Persistence.EF.Newses
             _news.Remove(news);
         }
 
-        public News? FindCategoryByNews(int categoryId)
+        public News? FindNewsByCategory(int categoryId)
         {
            return _news.FirstOrDefault(_=>_.CategoryId == categoryId);
         }
