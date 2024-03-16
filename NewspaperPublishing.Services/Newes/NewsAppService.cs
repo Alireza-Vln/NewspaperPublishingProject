@@ -89,7 +89,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
             var news= _newsRepository.FindNewsById(id);
             if (news == null)
             {
-                throw new ThrowDeleteNewsIfNewsIsException();
+                throw new ThrowDeleteNewsIfNewsIsNullException();
             }
             var x = _newsRepository.FindNewspaperByNews(news.Id);
             if (x != null)

@@ -85,7 +85,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
 
             var actual = () => _sut.Delete(dummyNewsId);
 
-            await actual.Should().ThrowExactlyAsync<ThrowDeleteNewsIfNewsIsException>();
+            await actual.Should().ThrowExactlyAsync<ThrowDeleteNewsIfNewsIsNullException>();
 
         }
     }

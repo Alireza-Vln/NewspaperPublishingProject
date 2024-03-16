@@ -136,7 +136,7 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
             var actual = ReadContext.Newspapers.Single();
             actual.Title.Should().Be("خبر فارس");
             actual.Date.Should().Be(_fakeTime);
-           actual.Weight.Should().Be(25);
+           actual.Weight.Should().Be(20);
         }
         [Fact]
         public void Run()

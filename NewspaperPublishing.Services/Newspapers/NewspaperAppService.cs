@@ -5,6 +5,7 @@ using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Newes.Contracts;
+using NewspaperPublishing.Services.Unit.Tests.Newspapers;
 using NewspaperPublishing.Spec.Tests.Categories;
 
 namespace NewspaperPublishing.Spec.Tests.Newspapers
@@ -44,6 +45,10 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
             {
                 var weight = 0;
                 var category=_categoryRepository.FindCategoryById(categoryId);
+                if (category == null)
+                {
+                    throw new ThrowAddsNewspaperIfCategoryIsNullException();
+                }
                 var newspaperCategory = new NewspaperCategory()
                 {
                     CategoryId = category.Id,
@@ -53,6 +58,10 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                 foreach (var newId in dto.newsId)
                 {
                     var news=_newsRepository.FindNewsById(newId);
+                    if (news == null)
+                    {
+                        throw new ThrowAddsNewspaperIfNewsIsNullException();
+                    }
                     if(category.Id == news.CategoryId)
                     {
                         var newspaperNews = new NewspaperNews()
