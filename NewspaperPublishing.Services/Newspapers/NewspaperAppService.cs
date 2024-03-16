@@ -42,12 +42,13 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
             };
             foreach (var categoryId in dto.CategoryId)
             {
+                var weight = 0;
                 var category=_categoryRepository.FindCategoryById(categoryId);
                 var newspaperCategory = new NewspaperCategory()
                 {
                     CategoryId = category.Id,
                 };
-              
+               weight= category.Weight ;
 
                 foreach (var newId in dto.newsId)
                 {
@@ -59,11 +60,16 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                             NewsId = news.Id,
                         };
                         newspaper.NewspaperNews.Add(newspaperNews);
+                        weight = weight - news.Weight;
                     }
-                   
                 }
                 newspaper.NewspaperCategories.Add(newspaperCategory);
+                if(weight!=0)
+                {
+                    throw new ThrowAddNewspaperTheWeightOfTheNewsCategoryHasNotReachedTheQuorumException();
+                }
                 
+                newspaper.Weight=+category.Weight;
             }
             _newspaperRepository.Add(newspaper);
             await _unitOfWork.Complete();

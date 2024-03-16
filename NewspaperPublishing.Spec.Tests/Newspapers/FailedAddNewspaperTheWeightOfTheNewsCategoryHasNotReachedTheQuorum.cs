@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using NewspaperPublishing.Contracts.Interfaces;
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
@@ -8,7 +7,7 @@ using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
-using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Integration;
+using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using NewspaperPublishing.Test.Tools.Newspapers.Factories;
 using NewspaperPublishing.Test.Tools.Tags.Builders;
 using System;
@@ -20,12 +19,7 @@ using Xunit;
 
 namespace NewspaperPublishing.Spec.Tests.Newspapers
 {
-    [Scenario(": نشر روزنامه  ")]
-    [Story("",
-    AsA = " ",
-    IWantTo = " ",
-    InOrderTo = " ")]
-    public class AddNewspapersTest : BusinessIntegrationTest
+    public class FailedAddNewspaperTheWeightOfTheNewsCategoryHasNotReachedTheQuorum:BusinessUnitTest
     {
         readonly NewspaperService _sut;
         private DateTime _fakeTime;
@@ -35,23 +29,18 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
         private News _news1;
         private News _news2;
         private News _news3;
-        private News _news4;
         private Author _author;
-        private AddNewspaperDto _dto;
-
-        public AddNewspapersTest()
+        private Func<Task> _actual;
+        public FailedAddNewspaperTheWeightOfTheNewsCategoryHasNotReachedTheQuorum()
         {
-
             _sut = NewspaperAppServiceFactory.Create(SetupContext, _fakeTime);
         }
-
         [Given(" در فهرست روزنامه ها روزنامه ای وجود ندارد")]
         [And("برچسبی به عنوان قتل در در دسته بندی جنابی با وزن20 وجود دارد")]
         [And("برچسبی به عنوان سرقت در در دسته بندی جنابی  با وزن 20 وجود دارد")]
         [And("خبری به عنوان کشته شدن داریوش مهرجویی با وزن 5  وجود دارد")]
         [And("خبری به عنوان کشته شدن مردی در کوچه با وزن 5  وجود دارد")]
         [And("خبری به عنوان دزدی از زنی باردار با وزن 5  وجود دارد")]
-        [And("خبری به عنوان دزدی از پسزی 15 ساله با وزن 5   وجود دارد")]
         [And("با نویسندگی علیر ضا ولدان وجود دارد")]
         private void Given()
         {
@@ -96,22 +85,12 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                 .WithAuthorId(_author.Id)
                 .Build();
             DbContext.Save(_news3);
-            _news4 = new NewsBuilder()
-            .WithTitle("دزدی از زنی باردار")
-            .WithWeight(5)
-            .WithCategoryId(_category.Id)
-            .WithAuthorId(_author.Id)
-            .Build();
-            DbContext.Save(_news4);
-           
-
-
 
         }
         [When("خبرهای مذکور با عنوان خبر فارس با تاریخ امروز را منتشر  میکنیم ")]
-        private async Task When()
+        private void When()
         {
-            _dto = new AddNewspaperDto()
+            var dto = new AddNewspaperDto()
             {
                 Title = "خبر فارس",
                 newsId = new List<int>
@@ -119,32 +98,27 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
                     _news1.Id,
                     _news2.Id,
                     _news3.Id,
-                    _news4.Id,
-                  
                 },
-                CategoryId=new List<int>
+                CategoryId = new List<int>
                 {
-                    _category.Id, 
+                    _category.Id,
                 }
-                
             };
-            await _sut.Add(_dto);
+          _actual= ()=> _sut.Add(dto);
         }
         [Then(" یک دسته بندی با خبرهای مذکور و تاریخ امروز با وزن 20 داریم  ")]
-        private void Then()
+        private async Task Then()
         {
-            var actual = ReadContext.Newspapers.Single();
-            actual.Title.Should().Be("خبر فارس");
-            actual.Date.Should().Be(_fakeTime);
-           actual.Weight.Should().Be(25);
+            await _actual.Should().ThrowExactlyAsync<ThrowAddNewspaperTheWeightOfTheNewsCategoryHasNotReachedTheQuorumException>();
+           
         }
         [Fact]
         public void Run()
         {
             Runner.RunScenario(
                 _ => Given(),
-                _ => When().Wait(),
-                _ => Then());
+                _ => When(),
+                _ => Then().Wait());
         }
     }
 }
