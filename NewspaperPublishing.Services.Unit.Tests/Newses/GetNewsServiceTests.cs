@@ -43,7 +43,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
             var actual = await _sut.Get(filter);
 
             actual.Single().Title.Should().Be(category.Title);
-            actual.Single().AuthorName.Should().Be(author.LastName);
+            actual.Single().AuthorName.Should().Be(author.FirstName+" "+author.LastName);
             actual.Single().Id.Should().Be(news.Id);
         }
     }

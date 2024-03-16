@@ -48,13 +48,15 @@ namespace NewspaperPublishing.Persistence.EF.Newses
         public List<GetNewsDto> Get(FiltersNewsDto filterDto)
         {
             var news = _news.Include(_ => _.Category)
-                 .Include(_ => _.NewsTags).ThenInclude(_=>_.Tag).Include(_ => _.Author)
+                 .Include(_ => _.NewsTags).ThenInclude(_=>_.Tag)
+                 .Include(_ => _.Author)
                  .Select(_ => new GetNewsDto
                  {
                      Id = _.Id,
                      Title = _.Title,
+                     Weight = _.Weight,
                      CategoryTitle = _.Category.Title,
-                     AuthorName = _.Author.LastName,
+                     AuthorName = _.Author.FirstName+" "+ _.Author.LastName,
                      Tags= _.NewsTags.Select(_=>_.Tag.Title).ToList(),
 
                  });

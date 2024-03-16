@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewspaperPublishing.Services.Newspapers.Contracts.Dtos;
+using NewspaperPublishing.Services.Tags.Contracts.Dtos;
 using NewspaperPublishing.Spec.Tests.Newspapers;
 
 namespace NewspaperPublishing.RestApi.Controllers.Newspapers
@@ -17,5 +19,10 @@ namespace NewspaperPublishing.RestApi.Controllers.Newspapers
         {
             await _service.Add(dto);
         }
+        [HttpGet]
+        public async Task<List<GetNewspaperDto>> Get()
+        {
+            return await _service.Get();
+        } 
     }
 }

@@ -5,6 +5,7 @@ using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Persistence.EF.Newspapers;
 using NewspaperPublishing.Services.Newes.Contracts;
+using NewspaperPublishing.Services.Newspapers.Contracts.Dtos;
 using NewspaperPublishing.Services.Unit.Tests.Newspapers;
 using NewspaperPublishing.Spec.Tests.Categories;
 
@@ -84,6 +85,11 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
             await _unitOfWork.Complete();
 
 
+        }
+
+        public async Task<List<GetNewspaperDto>> Get()
+        {
+           return _newspaperRepository.Get();
         }
     }
 }

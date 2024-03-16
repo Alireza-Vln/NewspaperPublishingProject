@@ -8,5 +8,6 @@
         public string Title { get; set; }
         public string CategoryTitle { get; set; }
         public List<string> Tags { get; set; }
+        public int Weight { get; set; }
     }
 }
