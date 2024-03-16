@@ -9,6 +9,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         void Delete(Author author);
         Author? FindAuthorById(int id);
         List<GetAuthorsDto> GetAll();
+        
       
     }
 }

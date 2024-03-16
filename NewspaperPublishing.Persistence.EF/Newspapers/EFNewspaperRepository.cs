@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
@@ -17,6 +18,7 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
         readonly DbSet<Newspaper> _newspaper;
         readonly DbSet<NewspaperNews> _newspaperNews;
         readonly DbSet<News> _news;
+        readonly DbSet<Author> _authors;
        
         public EFNewspaperRepository(EFDataContext context)
         {
@@ -50,6 +52,7 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
                     .Select(_ => _.News.Author.FirstName + " " + _.News.Author.LastName).ToList(),
 
                 });
+           
 
             if (filterDto.Category != null)
             {
@@ -63,6 +66,7 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
             {
                 newspaper = newspaper.Where(_ => _.AuthorName.Contains(filterDto.Author));
             }
+          
             return newspaper.ToList();
             
         }

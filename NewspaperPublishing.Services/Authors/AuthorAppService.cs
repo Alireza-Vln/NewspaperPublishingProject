@@ -40,7 +40,8 @@ namespace NewspaperPublishing.Spec.Tests.Authors
 
         public async Task<List<GetAuthorsDto>> Get()
         {
-            return _repository.GetAll();
+            
+            return  _repository.GetAll();
         }
 
         public async Task Update(int id, UpdateAuthorDto dto)

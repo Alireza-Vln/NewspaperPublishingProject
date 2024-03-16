@@ -22,7 +22,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         {
             _authors.Remove(author);
         }
-
+       
         public Author? FindAuthorById(int id)
         {
             return _authors.FirstOrDefault(_ => _.Id == id);
@@ -30,16 +30,17 @@ namespace NewspaperPublishing.Spec.Tests.Authors
 
         public List<GetAuthorsDto> GetAll()
         {
+            
             var author = _authors.Select
                  (_ => new GetAuthorsDto
                  {
                      Id = _.Id,
                      FirstName = _.FirstName,
                      LastName = _.LastName,
-                     
-                 }).ToList();
-            
-            return author;
+                     View = _.View,
+                 });
+           
+            return author.ToList();
 
         }
 

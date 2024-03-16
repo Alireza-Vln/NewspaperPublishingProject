@@ -5,6 +5,7 @@ using NewspaperPublishing.Spec.Tests.Newses;
 using NewspaperPublishing.Test.Tools.Categories.Builders;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
+using NewspaperPublishing.Test.Tools.Newses.Builders;
 using NewspaperPublishing.Test.Tools.Tags.Builders;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,56 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
             actual.Single().AuthorName.Should()
                 .Be(author.FirstName+" "+author.LastName);
             actual.Single().Id.Should().Be(news.Id);
+        }
+        [Fact]
+        public async void Get_gets_news_filtered_by_category()
+        {
+            var category = new CategoryBuilder().Build();
+            DbContext.Save(category);
+            var tag = new TagBuilder()
+                .WithCategoryId(category.Id)
+                .Build();
+            DbContext.Save(tag);
+            var author = new AuthorBuilder().Build();
+            DbContext.Save(author);
+            var news = new NewsBuilder()
+                .WithCategoryId(category.Id)
+                .WithAuthorId(author.Id)
+                .Build();
+            DbContext.Save(news);
+            var filter = new FilterNewsDtoBuilder()
+                .WithCategory(category.Title)
+                .WithAuthor(author.FirstName + " " + author.LastName)
+                .Build();
+            var actual= await _sut.Get(filter);
+            
+            actual.Single().CategoryTitle.Should().Be(category.Title);
+
+        }
+        [Fact]
+        public async void Get_gets_news_filtered_by_author()
+        {
+            var category = new CategoryBuilder().Build();
+            DbContext.Save(category);
+            var tag = new TagBuilder()
+                .WithCategoryId(category.Id)
+                .Build();
+            DbContext.Save(tag);
+            var author = new AuthorBuilder().Build();
+            DbContext.Save(author);
+            var news = new NewsBuilder()
+                .WithCategoryId(category.Id)
+                .WithAuthorId(author.Id)
+                .Build();
+            DbContext.Save(news);
+            var filter = new FilterNewsDtoBuilder()
+                .WithCategory(category.Title)
+                .WithAuthor(author.FirstName+" "+author.LastName)
+                .Build();
+            var actual = await _sut.Get(filter);
+
+            actual.Single().AuthorName.Should().Be(author.FirstName+" "+author.LastName);
+
         }
     }
 }
