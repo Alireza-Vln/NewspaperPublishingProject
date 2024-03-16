@@ -87,9 +87,10 @@ namespace NewspaperPublishing.Spec.Tests.Newspapers
 
         }
 
-        public async Task<List<GetNewspaperDto>> Get()
+        public async Task<List<GetNewspaperDto>> Get(FilterNewspaperDto? dto )
         {
-           return _newspaperRepository.Get();
+            
+           return _newspaperRepository.Get(dto);
         }
     }
 }

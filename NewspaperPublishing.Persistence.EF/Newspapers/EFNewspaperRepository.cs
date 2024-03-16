@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Services.Newspapers.Contracts.Dtos;
+using NewspaperPublishing.Services.Unit.Tests.Newspapers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
     {
         readonly DbSet<Newspaper> _newspaper;
         readonly DbSet<NewspaperNews> _newspaperNews;
+        readonly DbSet<News> _news;
        
         public EFNewspaperRepository(EFDataContext context)
         {
@@ -27,10 +30,8 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
             _newspaper.Add(newspaper);
         }
 
-        public List<GetNewspaperDto> Get()
+        public List<GetNewspaperDto> Get(FilterNewspaperDto? filterDto)
         {
-
-
             var newspaper = _newspaper.Include(_ => _.NewspaperNews)
                 .Include(_ => _.NewspaperCategories)
                 .Select(_ => new GetNewspaperDto
@@ -48,8 +49,22 @@ namespace NewspaperPublishing.Persistence.EF.Newspapers
                     AuthorName = _.NewspaperNews
                     .Select(_ => _.News.Author.FirstName + " " + _.News.Author.LastName).ToList(),
 
-                }) ;
+                });
+
+            if (filterDto.Category != null)
+            {
+                newspaper = newspaper.Where(_ => _.Categories.Contains(filterDto.Category));
+            }
+            if(filterDto.Tags != null)
+            {
+                newspaper=newspaper.Where(_=>_.Tags.Contains(filterDto.Tags));
+            }
+            if(filterDto.Author != null)
+            {
+                newspaper = newspaper.Where(_ => _.AuthorName.Contains(filterDto.Author));
+            }
             return newspaper.ToList();
+            
         }
     }
 }

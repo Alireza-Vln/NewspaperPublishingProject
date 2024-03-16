@@ -5,12 +5,12 @@ using NewspaperPublishing.Services.Unit.Tests.Authors;
 
 namespace NewspaperPublishing.Spec.Tests.Authors
 {
-    public class  AuthorAppService : AuthorService
+    public class AuthorAppService : AuthorService
     {
         readonly AuthorRepository _repository;
         readonly UnitOfWork _unitOfWork;
         public AuthorAppService(AuthorRepository repository,
-            UnitOfWork unitOfWork  )
+            UnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
@@ -29,7 +29,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
 
         public async Task Delete(int id)
         {
-            var author= _repository.FindAuthorById(id);
+            var author = _repository.FindAuthorById(id);
             if (author == null)
             {
                 throw new ThrowDeletesAuthorIfAuthorIsNullException();
@@ -40,18 +40,18 @@ namespace NewspaperPublishing.Spec.Tests.Authors
 
         public async Task<List<GetAuthorsDto>> Get()
         {
-             return _repository.GetAll(); 
+            return _repository.GetAll();
         }
 
         public async Task Update(int id, UpdateAuthorDto dto)
         {
-            var author=_repository.FindAuthorById(id);
-            if(author == null)
+            var author = _repository.FindAuthorById(id);
+            if (author == null)
             {
                 throw new ThrowUpdatesAuthorIfAuthorIsNullException();
             }
-            author.FirstName= dto.FirstName;
-            author.LastName= dto.LastName;
+            author.FirstName = dto.FirstName;
+            author.LastName = dto.LastName;
             await _unitOfWork.Complete();
         }
     }

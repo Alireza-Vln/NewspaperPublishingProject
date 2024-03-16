@@ -80,7 +80,8 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newspapers
             };
             DbContext.Save(newpaper);
 
-            await _sut.Get();
+            var filter = new FilterNewspaperDto();
+            await _sut.Get(filter);
 
             var actual = ReadContext.Newspapers.Single();
             actual.Title.Should().Be(newpaper.Title);
