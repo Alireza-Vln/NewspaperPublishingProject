@@ -44,6 +44,11 @@ namespace NewspaperPublishing.Spec.Tests.Authors
             return  _repository.GetAll();
         }
 
+        public async Task<List<GetAuthorsDto>> GetAuthorMostNews()
+        {
+           return  _repository.GetAuthorMostNews();
+        }
+
         public async Task Update(int id, UpdateAuthorDto dto)
         {
             var author = _repository.FindAuthorById(id);
@@ -55,5 +60,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
             author.LastName = dto.LastName;
             await _unitOfWork.Complete();
         }
+
+       
     }
 }

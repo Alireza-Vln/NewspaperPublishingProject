@@ -7,6 +7,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         Task Add(AddAuthorDto dto);
         Task Delete(int id);
         Task<List<GetAuthorsDto>> Get();
+        Task<List<GetAuthorsDto>> GetAuthorMostNews();
         Task Update(int id, UpdateAuthorDto dto);
     }
 }

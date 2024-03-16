@@ -4,6 +4,7 @@ using NewspaperPublishing.Infrastructure;
 using NewspaperPublishing.Persistence.EF;
 using NewspaperPublishing.Persistence.EF.Newses;
 using NewspaperPublishing.Persistence.EF.Newspapers;
+using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Newspapers;
 using System;
@@ -29,7 +30,8 @@ namespace NewspaperPublishing.Test.Tools.Newspapers.Factories
                 new EFUnitOfWork(context),
                 dateTimeServiceMock.Object,
                 new EFNewsRepository(context),
-                new EFCategoryRepository (context));
+                new EFCategoryRepository (context),
+                new EFAuthorRepository(context));
         }
     }
 }

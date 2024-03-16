@@ -20,5 +20,6 @@ namespace NewspaperPublishing.Services.Newes.Contracts
         News? FindNewsById(int id);
         List<GetNewsDto> Get(FiltersNewsDto dto);
         NewspaperNews? FindNewspaperByNews(int newsId);
+        News? FindNewsByTitle(string newsTitle);
     }
 }

@@ -59,6 +59,7 @@ namespace NewspaperPublishing.Persistence.EF.Newses
                      CategoryTitle = _.Category.Title,
                      AuthorName = _.Author.FirstName+" "+ _.Author.LastName,
                      Tags= _.NewsTags.Select(_=>_.Tag.Title).ToList(),
+                     View=_.View,
 
                  });
           
@@ -82,6 +83,11 @@ namespace NewspaperPublishing.Persistence.EF.Newses
         public NewspaperNews? FindNewspaperByNews(int newsId)
         {
             return _newspaperNews.FirstOrDefault(_ => _.NewsId == newsId);
+        }
+
+        public News? FindNewsByTitle(string newsTitle)
+        {
+            return _news.FirstOrDefault(_ => _.Title == newsTitle);
         }
     }
 }

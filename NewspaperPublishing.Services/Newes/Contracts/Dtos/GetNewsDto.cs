@@ -9,5 +9,6 @@
         public string CategoryTitle { get; set; }
         public List<string> Tags { get; set; }
         public int Weight { get; set; }
+        public int View { get; set; }
     }
 }
