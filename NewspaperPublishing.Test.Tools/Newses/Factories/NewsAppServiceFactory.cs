@@ -16,9 +16,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
                 new EFUnitOfWork(context),
                 new EFCategoryRepository(context),
                 new EFAuthorRepository(context),
-                new EFTagRepository(context),
-                new EFNewspaperRepository(context)
-                );
+                new EFTagRepository(context));
         }
     }
 }

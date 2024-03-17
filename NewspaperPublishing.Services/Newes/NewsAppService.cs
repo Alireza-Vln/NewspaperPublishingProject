@@ -24,21 +24,19 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         private CategoryRepository _categoryRepository;
         private AuthorRepository _authorRepository;
         private TagRepository _tagRepository;
-        private NewspaperRepository _newspaperRepository;
+
     
         public NewsAppService(NewsRepository repository,
             UnitOfWork unitOfWork,
             CategoryRepository categoryRepository,
             AuthorRepository authorRepository,
-            TagRepository tagRepository,
-            NewspaperRepository newspaperRepository)
+            TagRepository tagRepository )
         {
             _newsRepository = repository;
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
             _authorRepository = authorRepository;
             _tagRepository = tagRepository;
-            _newspaperRepository= newspaperRepository;
 
         }
 
@@ -103,6 +101,11 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         public async Task<List<GetNewsDto>> Get(FiltersNewsDto filter)
         {
             return _newsRepository.Get(filter);
+        }
+
+        public async Task<List<GetNewsDto>> GetNewsMostView()
+        {
+            return _newsRepository.GetNewsMostView();
         }
 
         public async Task Update(int id, UpdateNewsDto dto)

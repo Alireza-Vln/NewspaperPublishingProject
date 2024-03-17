@@ -37,6 +37,11 @@ namespace NewspaperPublishing.RestApi.Controllers.Newses
         {
             return await _service.Get(dto);
         }
+        [HttpGet("WithMostView")]
+        public async Task<List<GetNewsDto>> GetNewsWithMostView()
+        {
+            return await _service.GetNewsMostView();
+        }
                                                     
     }
 }

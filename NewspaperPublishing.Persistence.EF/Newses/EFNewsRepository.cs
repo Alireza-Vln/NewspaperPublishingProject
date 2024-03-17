@@ -89,5 +89,25 @@ namespace NewspaperPublishing.Persistence.EF.Newses
         {
             return _news.FirstOrDefault(_ => _.Title == newsTitle);
         }
+
+        public List<GetNewsDto> GetNewsMostView()
+        {
+            var news = _news.Include(_ => _.Category)
+                .Include(_ => _.NewsTags)
+                .ThenInclude(_ => _.Tag)
+                .Include(_ => _.Author)
+                .Select(_ => new GetNewsDto
+                {
+                    Id = _.Id,
+                    Title = _.Title,
+                    Weight = _.Weight,
+                    CategoryTitle = _.Category.Title,
+                    AuthorName = _.Author.FirstName + " " + _.Author.LastName,
+                    Tags = _.NewsTags.Select(_ => _.Tag.Title).ToList(),
+                    View = _.View,
+
+                });
+            return news.OrderByDescending(_=>_.View).ToList();
+        }
     }
 }

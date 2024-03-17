@@ -9,6 +9,7 @@ namespace NewspaperPublishing.Spec.Tests.Newses
         Task Add(int categoryId, int authorId,AddNewsDto dto);
         Task Delete(int id);
         Task<List<GetNewsDto>> Get(FiltersNewsDto filter);
+        Task<List<GetNewsDto>> GetNewsMostView();
         Task Update(int id, UpdateNewsDto dto);
     }
 }

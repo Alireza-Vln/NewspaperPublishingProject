@@ -74,7 +74,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
 
         }
         [Fact]
-        public async void Get_gets_news_filtered_by_author()
+        public async Task Get_gets_news_filtered_by_author()
         {
             var category = new CategoryBuilder().Build();
             DbContext.Save(category);
@@ -96,6 +96,29 @@ namespace NewspaperPublishing.Services.Unit.Tests.Newses
             var actual = await _sut.Get(filter);
 
             actual.Single().AuthorName.Should().Be(author.FirstName+" "+author.LastName);
+
+        }
+        [Fact]
+        public async Task Get_gets_news_with_most_view()
+        {
+            var category = new CategoryBuilder().Build();
+            DbContext.Save(category);
+            var tag = new TagBuilder()
+                .WithCategoryId(category.Id)
+                .Build();
+            DbContext.Save(tag);
+            var author = new AuthorBuilder().Build();
+            DbContext.Save(author);
+            var news = new NewsBuilder()
+                .WithCategoryId(category.Id)
+                .WithAuthorId(author.Id)
+                .WithView(20)
+                .Build();
+            DbContext.Save(news);
+
+            var actual = await _sut.GetNewsMostView();
+
+            actual.Single().View.Should().Be(20);
 
         }
     }

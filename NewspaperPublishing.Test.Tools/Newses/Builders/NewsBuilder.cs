@@ -4,7 +4,7 @@ using NewspaperPublishing.Entities.Tags;
 
 namespace NewspaperPublishing.Spec.Tests.Categories
 {
-    public class NewsBuilder 
+    public class NewsBuilder
     {
         readonly News _news;
         readonly NewsTag _newsTag;
@@ -22,7 +22,9 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                     {
                         TagId = 1,
                     }
-                }
+                },
+                View = 0,
+
             };
         }
         public NewsBuilder WithCategoryId(int categoryId)
@@ -37,7 +39,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         }
         public NewsBuilder WithAuthorId(int AuthorId)
         {
-            _news.AuthorId= AuthorId;
+            _news.AuthorId = AuthorId;
             return this;
         }
         public NewsBuilder WithTitle(string Title)
@@ -45,15 +47,21 @@ namespace NewspaperPublishing.Spec.Tests.Categories
             _news.Title = Title;
             return this;
         }
-        public News Build()
+        public NewsBuilder WithView(int View)
         {
-            return _news;
+            _news.View = View;
+            return this;
         }
+
 
         public NewsBuilder WithWeight(int weight)
         {
             _news.Weight = weight;
             return this;
+        }
+        public News Build()
+        {
+            return _news;
         }
     }
 }

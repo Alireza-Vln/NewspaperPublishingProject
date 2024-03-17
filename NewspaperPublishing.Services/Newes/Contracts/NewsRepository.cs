@@ -21,5 +21,6 @@ namespace NewspaperPublishing.Services.Newes.Contracts
         List<GetNewsDto> Get(FiltersNewsDto dto);
         NewspaperNews? FindNewspaperByNews(int newsId);
         News? FindNewsByTitle(string newsTitle);
+        List<GetNewsDto> GetNewsMostView();
     }
 }
