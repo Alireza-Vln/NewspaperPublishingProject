@@ -45,12 +45,27 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                      Weight = _.Weight,
                      View = _.View,
                      TagTitle=_.Tags.Select(_=>_.Title).ToList(),
+                     NewsCount=_.News.Count(),
                      
                  }).ToList();
             
             return category;  
             
-            
+        }
+        public List<GetCategoryDto> GetCategoryMostNews()
+        {
+            var category = _categories
+                .Select(_ => new GetCategoryDto
+                {
+                    Id = _.Id,
+                    Title = _.Title,
+                    Weight = _.Weight,
+                    View = _.View,
+                    TagTitle = _.Tags.Select(_ => _.Title).ToList(),
+                    NewsCount = _.News.Count(),
+
+                });
+            return category.OrderByDescending(_=>_.NewsCount).ToList();
         }
     }
 }

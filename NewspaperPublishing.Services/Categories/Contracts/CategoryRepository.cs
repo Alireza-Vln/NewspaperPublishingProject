@@ -10,5 +10,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         Category? FindCategoryById(int id);
         void Delete(Category? category);
         List<GetCategoryDto> GetAll();
+        List<GetCategoryDto> GetCategoryMostNews();
+
     }
 }

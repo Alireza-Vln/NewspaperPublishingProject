@@ -34,5 +34,10 @@ namespace NewspaperPublishing.RestApi.Controllers.Categories
         {
            return await _service.GetAll();
         }
+        [HttpGet("WithMostNews")]
+        public async Task<List<GetCategoryDto>> GetCategoryWithMostNews()
+        {
+            return await _service.GetCategoryMostNews();
+        }
     }
 }
