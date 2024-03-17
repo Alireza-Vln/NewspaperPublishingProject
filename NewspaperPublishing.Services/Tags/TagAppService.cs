@@ -47,7 +47,7 @@ namespace NewspaperPublishing.Spec.Tests.Tags
             var tag = _repository.FindTagById(id);
             if (tag == null)
             {
-
+                throw new ThrowDeleteTagIfTagIsNullException();
             }
             _repository.Delete(tag);
             await _unitOfWork.Complete();
