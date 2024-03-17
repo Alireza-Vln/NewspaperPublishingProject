@@ -11,5 +11,6 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         Author? FindAuthorByName(string author);
         List<GetAuthorsDto> GetAll();
         List<GetAuthorsDto> GetAuthorMostNews();
+        List<GetAuthorsDto> GetAuthorMostViews();
     }
 }

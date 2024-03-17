@@ -8,6 +8,7 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         Task Delete(int id);
         Task<List<GetAuthorsDto>> Get();
         Task<List<GetAuthorsDto>> GetAuthorMostNews();
+        Task<List<GetAuthorsDto>> GetAuthorMostView();
         Task Update(int id, UpdateAuthorDto dto);
     }
 }

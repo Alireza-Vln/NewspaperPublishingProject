@@ -49,6 +49,11 @@ namespace NewspaperPublishing.Spec.Tests.Authors
            return  _repository.GetAuthorMostNews();
         }
 
+        public async  Task<List<GetAuthorsDto>> GetAuthorMostView()
+        {
+            return _repository.GetAuthorMostViews();
+        }
+
         public async Task Update(int id, UpdateAuthorDto dto)
         {
             var author = _repository.FindAuthorById(id);

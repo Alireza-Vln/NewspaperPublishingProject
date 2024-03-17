@@ -10,9 +10,12 @@ namespace NewspaperPublishing.Spec.Tests.Authors
             _author = new Author
             {
                 FirstName = "dummy-first-name",
-                LastName = "dummy-last-name"
+                LastName = "dummy-last-name",
+                View=0,
+                
             };
         }
+
         public AuthorBuilder WithFirstName(string FirstName)
         {
             _author.FirstName = FirstName;
@@ -21,6 +24,11 @@ namespace NewspaperPublishing.Spec.Tests.Authors
         public AuthorBuilder WithLastName(string LastName)
         {
             _author.LastName = LastName;
+            return this;
+        }
+        public AuthorBuilder WithView(int View)
+        {
+            _author.View = View;
             return this;
         }
         public  Author Build()

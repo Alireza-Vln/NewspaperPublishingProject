@@ -63,8 +63,23 @@ namespace NewspaperPublishing.Spec.Tests.Authors
                      NewsCount = _.News.Count()
 
                  });
-            return author.ToList().OrderByDescending(_ => _.NewsCount).ToList();
+            return author.OrderByDescending(_ => _.NewsCount).ToList();
 
+        }
+
+        public List<GetAuthorsDto> GetAuthorMostViews()
+        {
+            var author = _authors.Select
+                 (_ => new GetAuthorsDto
+                 {
+                     Id = _.Id,
+                     FirstName = _.FirstName,
+                     LastName = _.LastName,
+                     View = _.View,
+                     NewsCount = _.News.Count()
+
+                 });
+            return author.OrderByDescending(_=> _.View).ToList();
         }
     }
 }

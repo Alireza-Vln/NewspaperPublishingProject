@@ -39,7 +39,7 @@ namespace NewspaperPublishing.Services.Unit.Tests.Authors
 
         }
         [Fact]
-        public async void Get_gets_author_with_the_most_news()
+        public async Task Get_gets_author_with_the_most_news()
         {
             var category=new CategoryBuilder().Build();  
             DbContext.Save(category);
@@ -69,6 +69,18 @@ namespace NewspaperPublishing.Services.Unit.Tests.Authors
 
             actual.Single().NewsCount.Should().Be(3);
            
+        }
+        [Fact]
+        public async Task Get_gets_author_with_the_most_view()
+        {
+            var author=new AuthorBuilder()
+                .WithView(6)
+                .Build();
+            DbContext.Save(author);
+
+            var actual= await _sut.GetAuthorMostView();
+
+            actual.Single().View.Should().Be(6);
         }
     }
 }

@@ -33,10 +33,15 @@ namespace NewspaperPublishing.RestApi.Controllers.Authors
         {
            return await _service.Get();
         }
-        [HttpGet("MostNews")]
+        [HttpGet("WithMostNews")]
         public async Task<List<GetAuthorsDto>> GetAuthorMostNews()
         {
             return await _service.GetAuthorMostNews();
+        }
+        [HttpGet("WithMostView")]
+        public async Task<List<GetAuthorsDto>> GetAuthorMostView()
+        {
+            return await _service.GetAuthorMostView();
         }
     }
 }
