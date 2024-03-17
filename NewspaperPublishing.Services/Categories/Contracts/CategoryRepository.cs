@@ -11,6 +11,6 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         void Delete(Category? category);
         List<GetCategoryDto> GetAll();
         List<GetCategoryDto> GetCategoryMostNews();
-
+        List<GetCategoryDto> GetCategoryMostView();
     }
 }

@@ -8,7 +8,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
     public class EFCategoryRepository : CategoryRepository
     {
         readonly DbSet<Category> _categories;
-       
+
         public EFCategoryRepository(EFDataContext context)
         {
             _categories = context.Categories;
@@ -17,7 +17,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         public void Add(Category category)
         {
 
-           _categories.Add(category);
+            _categories.Add(category);
         }
 
         public void Delete(Category? category)
@@ -44,13 +44,13 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                      Title = _.Title,
                      Weight = _.Weight,
                      View = _.View,
-                     TagTitle=_.Tags.Select(_=>_.Title).ToList(),
-                     NewsCount=_.News.Count(),
-                     
+                     TagTitle = _.Tags.Select(_ => _.Title).ToList(),
+                     NewsCount = _.News.Count(),
+
                  }).ToList();
-            
-            return category;  
-            
+
+            return category;
+
         }
         public List<GetCategoryDto> GetCategoryMostNews()
         {
@@ -65,7 +65,23 @@ namespace NewspaperPublishing.Spec.Tests.Categories
                     NewsCount = _.News.Count(),
 
                 });
-            return category.OrderByDescending(_=>_.NewsCount).ToList();
+            return category.OrderByDescending(_ => _.NewsCount).ToList();
+        }
+
+        public List<GetCategoryDto> GetCategoryMostView()
+        {
+            var category = _categories
+                 .Select(_ => new GetCategoryDto
+                 {
+                     Id = _.Id,
+                     Title = _.Title,
+                     Weight = _.Weight,
+                     View = _.View,
+                     TagTitle = _.Tags.Select(_ => _.Title).ToList(),
+                     NewsCount = _.News.Count(),
+
+                 });
+            return category.OrderByDescending (_ => _.View).ToList();
         }
     }
 }

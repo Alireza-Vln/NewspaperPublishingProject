@@ -9,6 +9,7 @@ namespace NewspaperPublishing.Spec.Tests.Categories
         Task Delete(int id);
         Task<List<GetCategoryDto>> GetAll();
         Task<List<GetCategoryDto>> GetCategoryMostNews();
+        Task<List<GetCategoryDto>> GetCategoryMostView();
         Task Update(int id, UpdateCategoryDto dto);
     }
 }

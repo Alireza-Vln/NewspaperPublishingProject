@@ -16,6 +16,7 @@ namespace NewspaperPublishing.Test.Tools.Categories.Builders
             {
                 Title = "dummy-title",
                 Weight = 20,
+                View=0,
             };
         }
         public CategoryBuilder WithTitle(string title)
@@ -28,6 +29,11 @@ namespace NewspaperPublishing.Test.Tools.Categories.Builders
         public CategoryBuilder WithWeight(int weight)
         {
             _category.Weight = weight;
+            return this;
+        }
+        public CategoryBuilder WithView(int view)
+        {
+            _category.View = view;
             return this;
         }
         public Category Build()

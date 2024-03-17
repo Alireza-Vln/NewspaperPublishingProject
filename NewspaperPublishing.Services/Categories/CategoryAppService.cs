@@ -61,6 +61,11 @@ namespace NewspaperPublishing.Spec.Tests.Categories
            return _repository.GetCategoryMostNews();
         }
 
+        public async Task<List<GetCategoryDto>> GetCategoryMostView()
+        {
+            return _repository.GetCategoryMostView();
+        }
+
         public async Task Update(int id, UpdateCategoryDto dto)
         {
             var category= _repository.FindCategoryById(id);
