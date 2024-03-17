@@ -1,5 +1,4 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
-using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewspaperCategories;
 using NewspaperPublishing.Entities.NewspaperNewses;
 using NewspaperPublishing.Entities.Newspapers;

@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using NewspaperPublishing.Entities.Newspapers;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
@@ -9,11 +8,6 @@ using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using NewspaperPublishing.Test.Tools.Newspapers.Factories;
 using NewspaperPublishing.Test.Tools.Tags.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace NewspaperPublishing.Services.Unit.Tests.Newspapers

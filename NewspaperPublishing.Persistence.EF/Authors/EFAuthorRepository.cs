@@ -2,7 +2,6 @@
 using NewspaperPublishing.Entities.Authors;
 using NewspaperPublishing.Persistence.EF;
 using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
-using System.Collections.Immutable;
 
 namespace NewspaperPublishing.Spec.Tests.Authors
 {

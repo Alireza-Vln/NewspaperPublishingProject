@@ -6,11 +6,7 @@ using NewspaperPublishing.Test.Tools.Categories.Factories;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig;
 using NewspaperPublishing.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using NewspaperPublishing.Test.Tools.Tags.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Xunit;
 
 namespace NewspaperPublishing.Services.Unit.Tests.CategoryTests

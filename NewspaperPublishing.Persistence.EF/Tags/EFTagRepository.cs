@@ -12,27 +12,22 @@ namespace NewspaperPublishing.Spec.Tests.Tags
         {
             _tags = context.Tags;
         }
-
         public void Add(Tag tag)
         {
             _tags.Add(tag);
         }
-
         public void Delete(Tag tag)
         {
             _tags.Remove(tag);
         }
-
         public Tag? FindTagById(int id)
         {
            return _tags.FirstOrDefault(_ => _.Id == id);
         }
-
         public Tag? FindTagTitle(string title)
         {
             return _tags.FirstOrDefault(_=>_.Title == title);
         }
-
         public List<GetTagDto> GetAll()
         {
           return _tags.Include(_ => _.Category)

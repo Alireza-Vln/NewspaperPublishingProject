@@ -1,11 +1,6 @@
 ﻿using NewspaperPublishing.Contracts.Interfaces;
-using NewspaperPublishing.Entities.Authors;
-using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewsTags;
-using NewspaperPublishing.Entities.Tags;
-using NewspaperPublishing.Persistence.EF.Newspapers;
-using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Newes.Contracts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts.Exeptions;
@@ -13,7 +8,6 @@ using NewspaperPublishing.Services.Unit.Tests.Newses;
 using NewspaperPublishing.Spec.Tests.Authors;
 using NewspaperPublishing.Spec.Tests.Categories;
 using NewspaperPublishing.Spec.Tests.Tags;
-using System.Runtime.Serialization;
 
 namespace NewspaperPublishing.Spec.Tests.Newses
 {

@@ -2,10 +2,8 @@
 using NewspaperPublishing.Entities.Tags;
 using NewspaperPublishing.Services.Tags.Contracts.Dtos;
 using NewspaperPublishing.Services.Tags.Contracts.Exceptions;
-using NewspaperPublishing.Services.Unit.Tests.CategoryTests;
 using NewspaperPublishing.Services.Unit.Tests.TagsTests;
 using NewspaperPublishing.Spec.Tests.Categories;
-using System.Runtime.Serialization;
 
 namespace NewspaperPublishing.Spec.Tests.Tags
 {

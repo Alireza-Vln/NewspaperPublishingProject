@@ -1,17 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewspaperPublishing.Entities.Categories;
 using NewspaperPublishing.Entities.Newses;
 using NewspaperPublishing.Entities.NewspaperNewses;
-using NewspaperPublishing.Entities.NewsTags;
-using NewspaperPublishing.Services.Authors.Contarcts.Dtos;
 using NewspaperPublishing.Services.Newes.Contracts;
 using NewspaperPublishing.Services.Newes.Contracts.Dtos;
 using NewspaperPublishing.Services.Unit.Tests.Newses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewspaperPublishing.Persistence.EF.Newses
 {
